@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Context>
+	<Resource name="book-ds" auth="Container" type="javax.sql.DataSource"
+			  maxActive="15" maxIdle="8" maxWait="50000"
+			  username="sega" password="sylla" driverClassName="com.mysql.cj.jdbc.Driver"
+			  url="jdbc:mysql://localhost:3306/epsi-b3-19-20?serverTimezone=UTC"
+			  validationQuery="SELECT 1" testOnBorrow="true" />
+</Context>
