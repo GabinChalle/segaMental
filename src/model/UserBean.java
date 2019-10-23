@@ -44,10 +44,13 @@ public class UserBean implements Serializable {
 	public void authenticate( HttpServletRequest request )  {
 		
 		String login = request.getParameter( FORM_FIELD_LOGIN );
+		System.out.println(login + "////////////////");
 		String password = request.getParameter( FORM_FIELD_PWD );
+		System.out.println(password + "////////////////");
 		User user = null;
 		try {
 			user = DAOFactory.getUserDAO().authenticate( login, password );
+			System.out.println(user.getLogin());
 			if ( null != user ) {
 				request.getSession().setAttribute( ATT_SESSION_CONNECTED_USER, user );
 				authResult = "Bienvenue " + login + "!";
@@ -56,6 +59,7 @@ public class UserBean implements Serializable {
 				authResult = "Identification échouée, merci de recommencer...";
 			}
 		} catch ( SQLException e ) {
+			e.printStackTrace();
 			authResult = "Identification échouée : Pb de connexions à la base de données !";
 		}
 	}

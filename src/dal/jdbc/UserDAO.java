@@ -11,11 +11,11 @@ import java.util.List;
 
 public class UserDAO implements IUserDAO<Long, User> {
 
-    private static final String AUTHENT_QUERY = "SELECT * FROM user WHERE pseudo = ? AND password = ?";
-    private static final String INSERT_QUERY = "INSERT INTO user(id_user, pseudo, password) VALUES (?, ?, ?)";
-    private static final String UPDATE_QUERY = "UPDATE user SET pseudo = ?, password = ? WHERE id_user = ?";
-    private static final String REMOVE_QUERY = "DELETE * FROM user WHERE id_user= ? ";
-    private static final String FIND_QUERY = "SELECT * from user Where id_user = ?";
+    private static final String AUTHENT_QUERY = "SELECT * FROM utilisateur WHERE pseudo = ? AND password = ?";
+    private static final String INSERT_QUERY = "INSERT INTO utilisateur(id_user, pseudo, password) VALUES (?, ?, ?)";
+    private static final String UPDATE_QUERY = "UPDATE utilisateur SET pseudo = ?, password = ? WHERE id_user = ?";
+    private static final String REMOVE_QUERY = "DELETE * FROM utilisateur WHERE id_user= ? ";
+    private static final String FIND_QUERY = "SELECT * from utilisateur Where id_user = ?";
 
     @Override
     public User authenticate(String login, String password) throws SQLException {
@@ -28,13 +28,13 @@ public class UserDAO implements IUserDAO<Long, User> {
                 ps.setString(2, password);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        int nbConnections = rs.getInt("connections") + 1;
-                        rs.updateInt("connections", nbConnections);
+                        //int nbConnections = rs.getInt("connections") + 1;
+                        //rs.updateInt("connections", nbConnections);
                         rs.updateRow();
                         user = new User();
-                        user.setLogin(rs.getString("login"));
+                        user.setLogin(rs.getString("pseudo"));
                         user.setPassword(rs.getString("password"));
-                        user.setNbConnections(nbConnections);
+                        //user.setNbConnections(nbConnections);
                     }
                 }
             }
