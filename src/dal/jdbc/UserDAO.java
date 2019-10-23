@@ -2,6 +2,7 @@ package dal.jdbc;
 
 import bo.User;
 import dal.DAOFactory;
+import dal.IDAO;
 import dal.IUserDAO;
 
 import java.sql.*;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class UserDAO implements IUserDAO<Long, User> {
 
-    private static final String AUTHENT_QUERY = "SELECT * FROM user WHERE login = ? AND password = ?";
+    private static final String AUTHENT_QUERY = "SELECT * FROM user WHERE pseudo = ? AND password = ?";
     private static final String INSERT_QUERY = "INSERT INTO user(id_user, pseudo, password) VALUES (?, ?, ?)";
     private static final String UPDATE_QUERY = "UPDATE user SET pseudo = ?, password = ? WHERE id_user = ?";
     private static final String REMOVE_QUERY = "DELETE * FROM user WHERE id_user= ? ";
