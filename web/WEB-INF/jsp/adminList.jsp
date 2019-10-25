@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="item" items="${contactBean.user}" varStatus="loop">
+        <c:forEach var="item" items="${contactBean.users}" varStatus="loop">
             <tr>
                 <td>${loop.count}</td>
                 <td>${item.key}</td>
