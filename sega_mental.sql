@@ -8,7 +8,7 @@ CREATE TABLE operations
     REFERENCES USER(id_user)
 );
 
-CREATE TABLE utilisateur
+CREATE TABLE utilisateurs
 (
     id_user INT PRIMARY KEY NOT NULL auto_increment,
     pseudo VARCHAR(255),
@@ -23,15 +23,15 @@ CREATE TABLE expressions
 (
 	id_calcul INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	libelle VARCHAR(255),
-	res_attendu FLOAT,
-	res_donnee FLOAT,
+	res_attendu DOUBLE,
+	res_donnee DOUBLE,
 	id_op INT,
 	CONSTRAINT fk_id_ex
 	FOREIGN KEY (id_op)
 	REFERENCES operations(id_op)
 );
 
-INSERT INTO utilisateur (pseudo, PASSWORD)
+INSERT INTO utilisateurs (pseudo, PASSWORD)
  VALUES
  ('gabin', 'challe'),
  ('corentin', 'gautier'),
