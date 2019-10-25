@@ -1,6 +1,7 @@
 package controller;
 
 
+import model.GameBean;
 import model.UserBean;
 
 import javax.servlet.ServletException;
@@ -32,13 +33,16 @@ public class GameController extends HttpServlet {
 
         //bean.loadUserList(request);
         request.getServletContext().getRequestDispatcher(PAGE_GAME_JSP).forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        UserBean bean = new UserBean();
+        GameBean bean = new GameBean();
+
+        if(request.getServletPath().equals("/game")){
+            System.out.println("Ok");
+        }
         /*if (bean.setUserFromForm(request)) {
             response.sendRedirect(request.getContextPath() + PAGE_CONTACTS_LIST_SLT);
         } else {

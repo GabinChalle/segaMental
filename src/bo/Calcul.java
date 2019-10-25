@@ -6,7 +6,14 @@ import java.util.Random;
 
 public class Calcul {
 
-    public double calculer(String calcul) {
+    /*
+     * fonction qui permet d'avoir le résultat d'une expression mathématique passée en tant que String en paramètre
+     * Les différénts éléments sont répartis dans une ArrayList
+     * On recherche le calcul qui a la plus haute priorité, on le fait, puis on met la valeur dans le membre de gauche
+     * et on supprime le membre de droite et l'oppérateur
+     */
+
+    public static double calculer(String calcul) {
         ArrayList<String> expression = new ArrayList<>();
         Collections.addAll(expression, calcul.split(" "));
         while (expression.size() != 1) {
@@ -59,7 +66,11 @@ public class Calcul {
         return Double.parseDouble(expression.get(0));
     }
 
-    public String genererCalculBinaire() {
+    /*
+     * Fonction qui génére une expression seulement avec des opérateurs binaire comme : 5 + 7 * 2
+     */
+
+    public static String genererCalculBinaire() {
         int nbOpp = 2;
         int[] nombres = new int[nbOpp + 1];
         String expression = "";
@@ -91,7 +102,11 @@ public class Calcul {
 
     }
 
-    public String genererCalculUnaire() {
+    /*
+     * Fonction qui génére une expression avec des opérateurs binaire et un oppérateur unaire comme : 5 + 7 * rac 2
+     */
+
+    public static String genererCalculUnaire() {
         int nbOpp = 2;
         int[] nombres = new int[nbOpp + 1];
         String expression = "";

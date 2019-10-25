@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -29,15 +30,15 @@
                             <span class="input-group-label">
                                 <i class="fa fa-user"></i>
                             </span>
-                <input class="input-group-field" type="text" placeholder="Login" name="form-username"
-                       value="${userBean.currentUser.login}"/>
+                <input class="input-group-field" type="text" placeholder="Login" name="form-login"
+                       value="${userBean.currentContact.login}"/>
             </div>
             <div class="input-group">
                             <span class="input-group-label">
                                 <i class="fa fa-envelope"></i>
                             </span>
                 <input class="input-group-field" type="text" placeholder="Password" name="form-password"
-                       value="${userBean.currentUser.password}"/>
+                       value="${userBean.currentContact.password}"/>
             </div>
         </div>
         <button class="button expanded">Valider</button>
