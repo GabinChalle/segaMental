@@ -25,7 +25,7 @@
 			</c:if>
 			<!-- connection-->
 			<c:if test="${ !userBean.isConnected( pageContext.request ) }">
-				<form method="POST" action="login">
+				<form method="POST" action="/segaMental/login">
 					<div class="form-icons">
 
 						<h4>Formulaire de login</h4>
@@ -52,7 +52,7 @@
 			<div class="text-center">
 			<h3>OU</h3>
 			</div>			<!-- début de Création de compte -->
-			<form method="POST" action="persons">
+			<form method="POST" action="signup">
 			<input type="hidden" value="${requestScope.currentPerson.id}" name="form-id"/>
 			<div class="form-icons">
 				<h4>Création d'un compte</h4>
@@ -74,6 +74,10 @@
 			<button class="button expanded">Valider</button>
 			</form>
 			<!-- fin de création de compte-->
+
+			<form method="POST" action="admin">
+				<button class="button expanded">Accès Admin</button>
+			</form>
 		</div>
 		<script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
 		<script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/foundation.min.js"></script>

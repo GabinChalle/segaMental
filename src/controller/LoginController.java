@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet( "/login" )
+@WebServlet( urlPatterns = {"/login", "/signup", "/admin"} )
 public class LoginController extends HttpServlet {
 	
 	private static final String PAGE_LOGIN_JSP = "/WEB-INF/jsp/login.jsp";
-	private static final String PAGE_HOME_JSP = "/contacts";
+	private static final String PAGE_HOME_JSP = "/users";
+	private static final String PAGE_ADMIN_JSP = "/admin";
 	
 	@Override
 	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -25,7 +26,9 @@ public class LoginController extends HttpServlet {
 			bean = new UserBean();
 			request.setAttribute( "userBean", bean );
 		}
+		//revoir selon le formulaire aussi
 		if ( bean.isConnected( request ) ) {
+			System.out.println("On est connecté");
 			response.sendRedirect( request.getContextPath() + PAGE_HOME_JSP );
 		} else {
 			request.getServletContext().getRequestDispatcher( PAGE_LOGIN_JSP ).forward( request, response );
@@ -34,10 +37,26 @@ public class LoginController extends HttpServlet {
 	
 	@Override
 	protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		
+		//if selon le form rempli
 		UserBean bean = new UserBean();
-		bean.authenticate( request );
-		request.setAttribute( "userBean", bean );
-		doGet( request, response );
+		//if form login
+		if(request.getServletPath().equals("/login")){
+			bean.authenticate( request );
+			request.setAttribute( "userBean", bean );
+			doGet( request, response );
+		}
+		else if(request.getServletPath().equals("/signup")){
+			//signup
+		}
+		else if(request.getServletPath().equals("/admin")){
+			//cas du bouton admin
+			request.getServletContext().getRequestDispatcher( PAGE_ADMIN_JSP ).forward( request, response );
+		}
+		else{
+			request.getServletContext().getRequestDispatcher( PAGE_LOGIN_JSP ).forward( request, response );
+		}
+		//System.out.println(request.getServletPath());
+		//if form create
+		//if form admin
 	}
 }

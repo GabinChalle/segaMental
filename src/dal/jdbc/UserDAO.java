@@ -11,11 +11,11 @@ import java.util.List;
 
 public class UserDAO implements IUserDAO<Long, User> {
 
-    private static final String AUTHENT_QUERY = "SELECT * FROM utilisateur WHERE pseudo = ? AND password = ?";
-    private static final String INSERT_QUERY = "INSERT INTO utilisateur(id_user, pseudo, password) VALUES (?, ?, ?)";
-    private static final String UPDATE_QUERY = "UPDATE utilisateur SET pseudo = ?, password = ? WHERE id_user = ?";
-    private static final String REMOVE_QUERY = "DELETE * FROM utilisateur WHERE id_user= ? ";
-    private static final String FIND_QUERY = "SELECT * from utilisateur Where id_user = ?";
+    private static final String AUTHENT_QUERY = "SELECT * FROM utilisateurs WHERE pseudo = ? AND password = ?";
+    private static final String INSERT_QUERY = "INSERT INTO utilisateurs(id_user, pseudo, password) VALUES (?, ?, ?)";
+    private static final String UPDATE_QUERY = "UPDATE utilisateurs SET pseudo = ?, password = ? WHERE id_user = ?";
+    private static final String REMOVE_QUERY = "DELETE * FROM utilisateurs WHERE id_user= ? ";
+    private static final String FIND_QUERY = "SELECT * from utilisateurs Where id_user = ?";
 
     @Override
     public User authenticate(String login, String password) throws SQLException {
