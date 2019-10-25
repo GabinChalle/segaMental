@@ -109,9 +109,9 @@ public class UserBean implements Serializable {
             String id = request.getParameter("id");
             if (null == id) id = "";
             loadUserList(request);
-           // if (user.containsKey(id)) {
-             //   currentUser = user.get(id);
-           // }
+            if (users.containsKey(id)) {
+              currentUser = users.get(id);
+           }
         }
     }
 
