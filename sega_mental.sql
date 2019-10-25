@@ -35,7 +35,8 @@ INSERT INTO utilisateurs (pseudo, PASSWORD)
  VALUES
  ('gabin', 'challe'),
  ('corentin', 'gautier'),
- ('yves', 'guerin');
+ ('yves', 'guerin'),
+ ('admin','kze369');
  
  
 
