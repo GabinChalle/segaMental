@@ -12,7 +12,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
 
     private static final String INSERT_QUERY = "INSERT INTO expressions(id_calcul, libelle, res_attendu, res_donnee) VALUES (?,?,?,?)";
     private static final String UPDATE_QUERY = "UPDATE expressions SET libelle=?, res_attendu = ?, res_donnee= ? WHERE id_calcul = ?";
-    private static final String REMOVE_QUERY = "DELETE * FROM expressions WHERE id_calcul= ? ";
+    private static final String REMOVE_QUERY = "DELETE FROM expressions WHERE id_calcul= ? ";
     private static final String FIND_QUERY = "SELECT * from expressions Where id_calcul = ?";
     private static final String FINDALL_QUERY = "SELECT * from expressions";
 

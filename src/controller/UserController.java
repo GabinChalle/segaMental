@@ -37,6 +37,11 @@ public class UserController extends HttpServlet {
                 break;
 
             case "users":
+                break;
+
+            case "delete":
+                bean.deleteCurrentUserRequest(request);
+                request.getServletContext().getRequestDispatcher(PAGE_USERS_LIST_JSP).forward(request,response);
             default:
                 bean.loadUserList(request);
                 request.getServletContext().getRequestDispatcher(PAGE_USERS_LIST_JSP).forward(request, response);

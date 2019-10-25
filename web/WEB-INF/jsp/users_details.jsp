@@ -21,11 +21,9 @@
     </div>
 </div>
 <div class="row small-5 small-centered">
-
-
     <form method="POST">
         <div class="form-icons">
-            <h4>Détail de l'utilisateur</h4>
+            <h4>Utilisateur  ${userBean.currentUser.login}</h4>
             <div class="input-group">
                             <span class="input-group-label">
                                 <i class="fa fa-user"></i>

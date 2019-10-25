@@ -14,7 +14,7 @@ public class UserDAO implements IUserDAO<Long, User> {
     private static final String AUTHENT_QUERY = "SELECT * FROM utilisateurs WHERE pseudo = ? AND password = ?";
     private static final String INSERT_QUERY = "INSERT INTO utilisateurs(id_user, pseudo, password) VALUES (?, ?, ?)";
     private static final String UPDATE_QUERY = "UPDATE utilisateurs SET pseudo = ?, password = ? WHERE id_user = ?";
-    private static final String REMOVE_QUERY = "DELETE * FROM utilisateurs WHERE id_user= ? ";
+    private static final String REMOVE_QUERY = "DELETE FROM utilisateurs WHERE id_user= ? ";
     private static final String FIND_QUERY = "SELECT * from utilisateurs Where id_user = ?";
     private static final String FINDALL_QUERY = "SELECT * from utilisateurs";
 
@@ -68,6 +68,7 @@ public class UserDAO implements IUserDAO<Long, User> {
             try (PreparedStatement ps = connection.prepareStatement(UPDATE_QUERY)) {
                 ps.setString(1, object.getLogin());
                 ps.setString(2, object.getPassword());
+                ps.setInt(3, object.getId());
                 ps.executeUpdate();
             }
         }

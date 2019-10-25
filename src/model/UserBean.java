@@ -113,6 +113,25 @@ public class UserBean implements Serializable {
         return true;
     }
 
+    public boolean deleteCurrentUserRequest(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        String name = request.getParameter(FORM_FIELD_LOGIN);
+        String password = request.getParameter(FORM_FIELD_PWD);
+        loadUserList(request);
+        if (users.containsKey(id)) {
+            currentUser = users.get(id);
+            currentUser.setLogin(name);
+            currentUser.setPassword(password);
+            try {
+                userDAO.delete(currentUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            users.remove(id, currentUser);
+        }
+        return true;
+    }
+
     public void loadCurrentUserFromRequest(HttpServletRequest request) {
         String path = request.getServletPath();
         if (-1 != path.indexOf("details")) {

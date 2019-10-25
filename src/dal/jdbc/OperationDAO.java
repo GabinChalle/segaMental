@@ -12,7 +12,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
 
     private static final String INSERT_QUERY = "INSERT INTO operations(id_op, score) VALUES (?, ?)";
     private static final String UPDATE_QUERY = "UPDATE operations SET score = ? WHERE id = ?";
-    private static final String REMOVE_QUERY = "DELETE * FROM operations WHERE id= ? ";
+    private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id= ? ";
     private static final String FIND_QUERY = "SELECT * from operations Where id = ?";
     private static final String FINDALL_QUERY = "SELECT * from operations";
 
