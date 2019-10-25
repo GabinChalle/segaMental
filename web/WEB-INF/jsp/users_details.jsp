@@ -30,15 +30,15 @@
                             <span class="input-group-label">
                                 <i class="fa fa-user"></i>
                             </span>
-                <input class="input-group-field" type="text" placeholder="Login" name="form-login"
-                       value="${userBean.currentContact.login}"/>
+                <input class="input-group-field" type="text" placeholder="Login" name="form-username"
+                       value="${userBean.currentUser.login}"/>
             </div>
             <div class="input-group">
                             <span class="input-group-label">
                                 <i class="fa fa-envelope"></i>
                             </span>
                 <input class="input-group-field" type="text" placeholder="Password" name="form-password"
-                       value="${userBean.currentContact.password}"/>
+                       value="${userBean.currentUser.password}"/>
             </div>
         </div>
         <button class="button expanded">Valider</button>
