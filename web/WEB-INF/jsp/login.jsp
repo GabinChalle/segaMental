@@ -76,7 +76,16 @@
 			<!-- fin de création de compte-->
 
 			<form method="POST" action="admin">
-				<button class="button expanded">Accès Admin</button>
+				<div class="form-icons">
+					<div class="input-group">
+							<span class="input-group-label">
+								<i class="fa fa-key"></i>
+							</span>
+						<input class="input-group-field" type="text" placeholder="password" name="form-password"
+							   value=""/>
+					</div>
+					<button class="button expanded">Accès Admin</button>
+				</div>
 			</form>
 		</div>
 		<script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
