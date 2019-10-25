@@ -10,7 +10,7 @@
 	</context-param>
 	<context-param>
 		<param-name>DS_NAME</param-name>
-		<param-value>java:/comp/env/book-ds</param-value>
+		<param-value>java:/comp/env/mental-ds</param-value>
 	</context-param>
 	
 	<session-config>

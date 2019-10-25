@@ -12,7 +12,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DAOFactory {
-	
+
+	//com.mysql.cj.jdbc.Driver
+	//jdbc:mysql://localhost:3306/sega_mental?useLegacyDatetimeCode=fasle&serverTimezone=UTC
+	//jdbc.db.login=LOGIN
+	//jdbc.db.password=PWD
+
 	private static String mode;
 	private static String dsName;
 	private static DataSource ds;
