@@ -33,7 +33,7 @@
             <tr>
                 <td>${loop.count}</td>
                 <td>${item.key}</td>
-                <td>${item.value.name}</td>
+                <td>${item.value.login}</td>
                 <td>${item.value.password}</td>
                 <td class="text-center">
                     <a href="<c:url value="/users/details?id=${item.key}" />">Edit</a>

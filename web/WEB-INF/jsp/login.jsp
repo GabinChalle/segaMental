@@ -76,13 +76,13 @@
 			<!-- fin de création de compte-->
 
 			<form method="POST" action="/segaMental/admin">
+				<input type="hidden" name="form-name" value="admin"/>
 				<div class="form-icons">
 					<div class="input-group">
 							<span class="input-group-label">
 								<i class="fa fa-key"></i>
 							</span>
-						<input class="input-group-field" type="text" placeholder="password" name="form-password"
-							   value=""/>
+						<input class="input-group-field" type="password" placeholder="password" name="form-password" value=""/>
 					</div>
 					<button class="button expanded">Accès Admin</button>
 				</div>

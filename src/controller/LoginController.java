@@ -30,7 +30,13 @@ public class LoginController extends HttpServlet {
 		//revoir selon le formulaire aussi
 		if ( bean.isConnected( request ) ) {
 			System.out.println("On est connecté");
-			response.sendRedirect( request.getContextPath() + PAGE_HOME_JSP );
+			if(request.getServletPath().equals("/login")) {
+				response.sendRedirect(request.getContextPath() + PAGE_HOME_JSP);
+			}
+			else if(request.getServletPath().equals("/admin")){
+				System.out.println("je suis là");
+				request.getServletContext().getRequestDispatcher( PAGE_ADMIN_JSP ).forward( request, response );
+			}
 		} else {
 			request.getServletContext().getRequestDispatcher( PAGE_LOGIN_JSP ).forward( request, response );
 		}
@@ -51,7 +57,9 @@ public class LoginController extends HttpServlet {
 		}
 		else if(request.getServletPath().equals("/admin")){
 			//cas du bouton admin
-			request.getServletContext().getRequestDispatcher( PAGE_ADMIN_JSP ).forward( request, response );
+			bean.authenticate( request );
+			request.setAttribute( "userBean", bean );
+			doGet( request, response );
 		}
 		else{
 			request.getServletContext().getRequestDispatcher( PAGE_LOGIN_JSP ).forward( request, response );

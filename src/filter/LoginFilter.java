@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter( urlPatterns = {"/users", "/users/*"} )
+@WebFilter( urlPatterns = {"/users", "/users/*, /game"} )
 public class LoginFilter implements Filter {
 	
 	private static final String PAGE_LOGIN_SVLT = "/login";
