@@ -17,7 +17,7 @@
 <body>
 <div class="callout large primary">
     <div class="row column text-center">
-        <h1>Gestion des contacts - Détails</h1>
+        <h1>${ userBean.currentContact.login } - Détails</h1>
     </div>
 </div>
 <div class="row small-5 small-centered">
@@ -25,27 +25,20 @@
 
     <form method="POST">
         <div class="form-icons">
-            <h4>Détail de la fiche</h4>
+            <h4>Détail de l'utilisateur</h4>
             <div class="input-group">
                             <span class="input-group-label">
                                 <i class="fa fa-user"></i>
                             </span>
-                <input class="input-group-field" type="text" placeholder="Name" name="form-name"
-                       value="${contactBean.currentContact.name}"/>
+                <input class="input-group-field" type="text" placeholder="Login" name="form-login"
+                       value="${userBean.currentContact.login}"/>
             </div>
             <div class="input-group">
                             <span class="input-group-label">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                <input class="input-group-field" type="text" placeholder="Email" name="form-email"
-                       value="${contactBean.currentContact.email}"/>
-            </div>
-            <div class="input-group">
-                            <span class="input-group-label">
-                                <i class="fa fa-phone"></i>
-                            </span>
-                <input class="input-group-field" type="text" placeholder="Phone" name="form-phone"
-                       value="${contactBean.currentContact.phone}"/>
+                <input class="input-group-field" type="text" placeholder="Password" name="form-password"
+                       value="${userBean.currentContact.password}"/>
             </div>
         </div>
         <button class="button expanded">Valider</button>
