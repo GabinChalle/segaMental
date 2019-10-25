@@ -1,7 +1,7 @@
 package dal;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Map;
 
 public interface IDAO<ID, E> {
 	
@@ -13,5 +13,5 @@ public interface IDAO<ID, E> {
 	
 	public E findById( ID id ) throws SQLException;
 	
-	public List<E> findByAll() throws SQLException;
+	public Map findByAll() throws SQLException;
 }

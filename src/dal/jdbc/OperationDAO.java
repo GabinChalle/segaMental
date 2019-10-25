@@ -1,20 +1,20 @@
 package dal.jdbc;
 
 import bo.Operation;
-import bo.Operation;
+import bo.User;
 import dal.DAOFactory;
 import dal.IDAO;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class OperationDAO implements IDAO<Long, Operation> {
 
-    private static final String INSERT_QUERY = "INSERT INTO operation(id_op, score) VALUES (?, ?)";
-    private static final String UPDATE_QUERY = "UPDATE operation SET score = ? WHERE id = ?";
-    private static final String REMOVE_QUERY = "DELETE * FROM operation WHERE id= ? ";
-    private static final String FIND_QUERY = "SELECT * from operation Where id = ?";
+    private static final String INSERT_QUERY = "INSERT INTO operations(id_op, score) VALUES (?, ?)";
+    private static final String UPDATE_QUERY = "UPDATE operations SET score = ? WHERE id = ?";
+    private static final String REMOVE_QUERY = "DELETE * FROM operations WHERE id= ? ";
+    private static final String FIND_QUERY = "SELECT * from operations Where id = ?";
+    private static final String FINDALL_QUERY = "SELECT * from operations";
 
     @Override
     public void create(Operation object) throws SQLException {
@@ -71,18 +71,18 @@ public class OperationDAO implements IDAO<Long, Operation> {
     }
 
     @Override
-    public List<Operation> findByAll() throws SQLException {
-        List<Operation> list = new ArrayList<>();
+    public Map findByAll() throws SQLException {
+        Map<String, Operation> list = new HashMap<>();
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
-            try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
+            try (PreparedStatement ps = connection.prepareStatement(FINDALL_QUERY)) {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         Operation operation;
                         operation = new Operation();
                         operation.setId(rs.getInt("id_op"));
                         operation.setScore(rs.getInt("score"));
-                        list.add(operation);
+                        list.put(UUID.randomUUID().toString(), operation);
                     }
                 }
             }

@@ -18,7 +18,7 @@ public class UserBean implements Serializable {
     private static final String FORM_FIELD_PWD = "form-password";
     public static final String ATT_SESSION_CONNECTED_USER = "connectedUser";
 
-    private static final String ATT_SESS_CONTACTS_LIST = "contactsList";
+    private static final String ATT_SESS_USERS_LIST = "usersList";
 
     private User currentUser;
     private User user;
@@ -53,15 +53,16 @@ public class UserBean implements Serializable {
 
     public void loadUserList(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        users = (Map<String, User>) session.getAttribute(ATT_SESS_CONTACTS_LIST);
+        users = (Map<String, User>) session.getAttribute(ATT_SESS_USERS_LIST);
         if (null == users) {
             users = new HashMap<>();
             try {
-                users = (Map<String, User>) userDAO.findByAll();
+                users = userDAO.findByAll();
+                System.out.println(users);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            session.setAttribute(ATT_SESS_CONTACTS_LIST, users);
+            session.setAttribute(ATT_SESS_USERS_LIST, users);
         }
     }
 
@@ -72,7 +73,6 @@ public class UserBean implements Serializable {
         User user = null;
         try {
             user = DAOFactory.getUserDAO().authenticate(login, password);
-            System.out.println(user.getLogin());
             if (null != user) {
                 request.getSession().setAttribute(ATT_SESSION_CONNECTED_USER, user);
                 authResult = "Bienvenue " + login + "!";

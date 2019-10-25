@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 public class UserController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
-    private static final String PAGE_CONTACTS_LIST_JSP = "/WEB-INF/jsp/adminList.jsp";
-    private static final String PAGE_CONTACTS_DETAILS_JSP = "/WEB-INF/jsp/users_details.jsp";
-    private static final String PAGE_CONTACTS_LIST_SLT = "/user";
+    private static final String PAGE_USERS_LIST_JSP = "/WEB-INF/jsp/adminList.jsp";
+    private static final String PAGE_USERS_DETAILS_JSP = "/WEB-INF/jsp/users_details.jsp";
+    private static final String PAGE_USERS_LIST_SLT = "/user";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,13 +33,13 @@ public class UserController extends HttpServlet {
         switch (realPath) {
             case "details":
                 bean.loadCurrentUserFromRequest(request);
-                request.getServletContext().getRequestDispatcher(PAGE_CONTACTS_DETAILS_JSP).forward(request, response);
+                request.getServletContext().getRequestDispatcher(PAGE_USERS_DETAILS_JSP).forward(request, response);
                 break;
 
-            case "contacts":
+            case "users":
             default:
                 bean.loadUserList(request);
-                request.getServletContext().getRequestDispatcher(PAGE_CONTACTS_LIST_JSP).forward(request, response);
+                request.getServletContext().getRequestDispatcher(PAGE_USERS_LIST_JSP).forward(request, response);
         }
     }
 
@@ -48,10 +48,10 @@ public class UserController extends HttpServlet {
 
         UserBean bean = new UserBean();
         if (bean.setUserFromForm(request)) {
-            response.sendRedirect(request.getContextPath() + PAGE_CONTACTS_LIST_SLT);
+            response.sendRedirect(request.getContextPath() + PAGE_USERS_LIST_SLT);
         } else {
             request.setAttribute("contactBean", bean);
-            request.getServletContext().getRequestDispatcher(PAGE_CONTACTS_DETAILS_JSP).forward(request, response);
+            request.getServletContext().getRequestDispatcher(PAGE_USERS_DETAILS_JSP).forward(request, response);
         }
     }
 }

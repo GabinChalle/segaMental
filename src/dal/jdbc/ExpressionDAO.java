@@ -1,19 +1,20 @@
 package dal.jdbc;
 
 import bo.Expression;
+import bo.User;
 import dal.DAOFactory;
 import dal.IDAO;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ExpressionDAO implements IDAO<Long, Expression> {
 
-    private static final String INSERT_QUERY = "INSERT INTO expression(id_calcul, libelle, res_attendu, res_donnee) VALUES (?,?,?,?)";
-    private static final String UPDATE_QUERY = "UPDATE expression SETlibelle=?, res_attendu = ?, res_donnee= ? WHERE id_calcul = ?";
-    private static final String REMOVE_QUERY = "DELETE * FROM expression WHERE id_calcul= ? ";
-    private static final String FIND_QUERY = "SELECT * from expression Where id_calcul = ?";
+    private static final String INSERT_QUERY = "INSERT INTO expressions(id_calcul, libelle, res_attendu, res_donnee) VALUES (?,?,?,?)";
+    private static final String UPDATE_QUERY = "UPDATE expressions SET libelle=?, res_attendu = ?, res_donnee= ? WHERE id_calcul = ?";
+    private static final String REMOVE_QUERY = "DELETE * FROM expressions WHERE id_calcul= ? ";
+    private static final String FIND_QUERY = "SELECT * from expressions Where id_calcul = ?";
+    private static final String FINDALL_QUERY = "SELECT * from expressions";
 
     @Override
     public void create(Expression object) throws SQLException {
@@ -74,21 +75,20 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
     }
 
     @Override
-    public List<Expression> findByAll() throws SQLException {
-        List<Expression> list = new ArrayList<>();
+    public Map findByAll() throws SQLException {
+        Map<String, Expression> list = new HashMap<>();
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
-            try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
+            try (PreparedStatement ps = connection.prepareStatement(FINDALL_QUERY)) {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         Expression expression;
                         expression = new Expression();
-                        expression.setId(rs.getInt("id_op"));
+                        expression.setId(rs.getInt("id_calcul"));
                         expression.setLibelle(rs.getString("libelle"));
                         expression.setResAttendu(rs.getDouble("res_attendu"));
                         expression.setResDonnee(rs.getDouble("res_donnee"));
-                        list.add(expression);
-
+                        list.put(UUID.randomUUID().toString(), expression);
                     }
                 }
             }
