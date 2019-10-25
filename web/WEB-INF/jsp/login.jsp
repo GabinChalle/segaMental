@@ -60,7 +60,7 @@
 						<span class="input-group-label">
 							<i class="fa fa-user"></i>
 						</span>
-					<input class="input-group-field" type="text" placeholder="Login" name="form-name"
+					<input class="input-group-field" type="text" placeholder="Login" name="form-username"
 						   value=""/>
 				</div>
 				<div class="input-group">
@@ -76,7 +76,7 @@
 			<!-- fin de création de compte-->
 
 			<form method="POST" action="/segaMental/admin">
-				<input type="hidden" name="form-name" value="admin"/>
+				<input type="hidden" name="form-username" value="admin"/>
 				<div class="form-icons">
 					<div class="input-group">
 							<span class="input-group-label">

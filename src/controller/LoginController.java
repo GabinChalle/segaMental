@@ -54,9 +54,15 @@ public class LoginController extends HttpServlet {
 		}
 		else if(request.getServletPath().equals("/signup")){
 			//Est ce que on peut
+			if (bean.setUserFromForm(request)) {
+				response.sendRedirect(request.getContextPath() + "/login");
+			} else {
+				doGet(request,response);
+			}
 		}
 		else if(request.getServletPath().equals("/admin")){
 			//cas du bouton admin
+            //System.out.println(request.getHeader("form-name"));
 			bean.authenticate( request );
 			request.setAttribute( "userBean", bean );
 			doGet( request, response );
