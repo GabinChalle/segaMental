@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 			doGet( request, response );
 		}
 		else if(request.getServletPath().equals("/signup")){
-			//signup
+			//Est ce que on peut
 		}
 		else if(request.getServletPath().equals("/admin")){
 			//cas du bouton admin

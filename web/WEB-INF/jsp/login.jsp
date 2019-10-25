@@ -52,7 +52,7 @@
 			<div class="text-center">
 			<h3>OU</h3>
 			</div>			<!-- début de Création de compte -->
-			<form method="POST" action="signup">
+			<form method="POST" action="/segaMental/signup">
 			<input type="hidden" value="${requestScope.currentPerson.id}" name="form-id"/>
 			<div class="form-icons">
 				<h4>Création d'un compte</h4>
@@ -75,7 +75,7 @@
 			</form>
 			<!-- fin de création de compte-->
 
-			<form method="POST" action="admin">
+			<form method="POST" action="/segaMental/admin">
 				<div class="form-icons">
 					<div class="input-group">
 							<span class="input-group-label">
