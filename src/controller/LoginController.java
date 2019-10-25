@@ -57,6 +57,7 @@ public class LoginController extends HttpServlet {
 		}
 		else if(request.getServletPath().equals("/admin")){
 			//cas du bouton admin
+            //System.out.println(request.getHeader("form-name"));
 			bean.authenticate( request );
 			request.setAttribute( "userBean", bean );
 			doGet( request, response );

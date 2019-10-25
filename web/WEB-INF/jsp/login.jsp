@@ -76,7 +76,7 @@
 			<!-- fin de création de compte-->
 
 			<form method="POST" action="/segaMental/admin">
-				<input type="hidden" name="form-name" value="admin"/>
+				<input type="hidden" name="form-username" value="admin"/>
 				<div class="form-icons">
 					<div class="input-group">
 							<span class="input-group-label">

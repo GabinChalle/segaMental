@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = {"/users", "/users/details", "/users/delete"})
+@WebServlet(urlPatterns = {"/users", "/users/details", "/users/delete", "/user"})
 public class UserController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
