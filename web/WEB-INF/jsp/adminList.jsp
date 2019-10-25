@@ -44,7 +44,7 @@
         </tbody>
     </table>
     <div class="text-right">
-        <a class="button align-right" href="<c:url value="/contacts/details" />"><i
+        <a class="button align-right" href="<c:url value="/users/details"/>"><i
                 class="fa fa-user-plus"></i> Ajouter</a>
     </div>
 </div>
