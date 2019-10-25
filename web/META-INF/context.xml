@@ -2,7 +2,7 @@
 <Context>
 	<Resource name="mental-ds" auth="Container" type="javax.sql.DataSource"
 			  maxActive="15" maxIdle="8" maxWait="50000"
-			  username="root" password="root" driverClassName="com.mysql.cj.jdbc.Driver"
+			  username="root" password="" driverClassName="com.mysql.cj.jdbc.Driver"
 			  url="jdbc:mysql://localhost:3306/sega_mental?serverTimezone=UTC"
 			  validationQuery="SELECT 1" testOnBorrow="true" />
 </Context>
