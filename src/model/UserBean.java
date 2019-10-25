@@ -67,7 +67,6 @@ public class UserBean implements Serializable {
     }
 
     public void authenticate(HttpServletRequest request) {
-
         String login = request.getParameter(FORM_FIELD_LOGIN);
         String password = request.getParameter(FORM_FIELD_PWD);
         User user = null;
@@ -93,12 +92,23 @@ public class UserBean implements Serializable {
         loadUserList(request);
         if (users.containsKey(id)) {
             currentUser = users.get(id);
+            currentUser.setLogin(name);
+            currentUser.setPassword(password);
+            try {
+                userDAO.create(currentUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } else {
             currentUser = new User();
-            id = UUID.randomUUID().toString();
+            currentUser.setLogin(name);
+            currentUser.setPassword(password);
+            try {
+                userDAO.create(currentUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        currentUser.setLogin(name);
-        currentUser.setPassword(password);
         users.put(id, currentUser);
         return true;
     }
@@ -110,8 +120,8 @@ public class UserBean implements Serializable {
             if (null == id) id = "";
             loadUserList(request);
             if (users.containsKey(id)) {
-              currentUser = users.get(id);
-           }
+                currentUser = users.get(id);
+            }
         }
     }
 

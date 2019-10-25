@@ -32,7 +32,7 @@
         <c:forEach var="item" items="${contactBean.users}" varStatus="loop">
             <tr>
                 <td>${loop.count}</td>
-                <td>${item.key}</td>
+                <td>${item.value.id}</td>
                 <td>${item.value.login}</td>
                 <td>${item.value.password}</td>
                 <td class="text-center">
