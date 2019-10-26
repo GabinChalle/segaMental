@@ -1,3 +1,4 @@
+<%@ page import="org.w3c.dom.ls.LSOutput" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +23,36 @@
 		<button class="button expanded" type="submit"> Voir la liste des scores </button>
 	</form>
 
-	<form method="post" action="/segaMental/test">
-		<button class="button expanded" type="submit"> Commencer le test </button>
-	</form>
+	<%
+		if(request.getParameter("page") != null){
+			if(Integer.parseInt(request.getParameter("page")) > 0){
+	%>
+		<form method="post" action="/segaMental/test?page=<%= request.getParameter("page")%>">
+			<p> Affichage du calcul </p>
+			<input type="text" name="result">
+
+			<button class="button expanded" type="submit" name="precedent"> Précédent </button>
+			<button class="button expanded" type="submit" name="next"> Suivant </button>
+		</form>
+	<%
+			}else{
+	%>
+		<form method="post" action="/segaMental/test?page=1">
+			<button class="button expanded" type="submit"> Commencer le test </button>
+		</form>
+	<%
+			}
+		}
+		else{
+	%>
+		<form method="post" action="/segaMental/test?page=1">
+			<button class="button expanded" type="submit"> Commencer le test </button>
+		</form>
+	<%
+		}
+	%>
+
+
 
 </div>
 <script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>

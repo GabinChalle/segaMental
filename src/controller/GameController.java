@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,8 +40,19 @@ public class GameController extends HttpServlet {
             request.getServletContext().getRequestDispatcher(PAGE_SCORES_LIST_SLT).forward(request, response);
         }
         else if (request.getServletPath().equals("/test")) {
+            int page = Integer.parseInt(request.getParameter("page"));
+            //String action = request.getParameter("suivant");
+            //System.out.println(action);
+            //Enumeration<String> names = request.getAttributeNames();
+            //String oui = "oui";
+            if(request.getAttribute("suivant") != null){
+                page --;
+            }
+            else{
+                page ++;
+            }
             bean.getBinaryExp();
-            response.sendRedirect(request.getContextPath() + PAGE_GAME_JSP);
+            request.getServletContext().getRequestDispatcher(PAGE_GAME_JSP + "?page=" + page).forward(request, response);
         }
         /*else {
             request.setAttribute("contactBean", bean);
