@@ -38,6 +38,7 @@ public class GameController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GameBean bean = new GameBean();
         if(request.getServletPath().equals("/list")){
+            bean.loadScoreList(request);
             request.getServletContext().getRequestDispatcher(PAGE_SCORES_LIST_SLT).forward(request, response);
         }
         else if (request.getServletPath().equals("/test")) {
