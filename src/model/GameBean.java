@@ -15,7 +15,7 @@ public class GameBean implements Serializable {
 
     private Map operations;
     private OperationDAO operationDAO;
-    private static final String ATT_SESS_SCORES_LIST = "scoresList";
+    private static final String ATT_SESS_SCORES_LIST = "scorelist";
     private Operation currentOperation;
 
     public GameBean() {
@@ -36,7 +36,7 @@ public class GameBean implements Serializable {
             operations = new HashMap<>();
             try {
                 operations = operationDAO.findByAll();
-                System.out.println(operations);
+                System.out.println("/////////////////////////////"+operations);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

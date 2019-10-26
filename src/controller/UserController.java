@@ -22,26 +22,22 @@ public class UserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         UserBean bean = new UserBean();
         request.setAttribute("contactBean", bean);
-
         String path = request.getServletPath();
         LOGGER.log(Level.INFO, "In the doGet for {0}", path);
         String realPath = path.substring(path.lastIndexOf("/") + 1);
-
         switch (realPath) {
             case "details":
                 bean.loadCurrentUserFromRequest(request);
                 request.getServletContext().getRequestDispatcher(PAGE_USERS_DETAILS_JSP).forward(request, response);
                 break;
-
             case "users":
                 break;
-
             case "delete":
                 bean.deleteCurrentUserRequest(request);
                 request.getServletContext().getRequestDispatcher(PAGE_USERS_LIST_JSP).forward(request,response);
+                break;
             default:
                 bean.loadUserList(request);
                 request.getServletContext().getRequestDispatcher(PAGE_USERS_LIST_JSP).forward(request, response);
