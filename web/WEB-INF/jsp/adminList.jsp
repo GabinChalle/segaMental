@@ -17,37 +17,55 @@
     </div>
 </div>
 <jsp:useBean id="contactBean" class="model.UserBean" scope="request"/>
-<div class="row small-8 small-centered">
-    <table class="unstriped">
-        <thead>
-        <tr>
-            <th>N°</th>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Password</th>
-            <th class="text-center">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="item" items="${contactBean.users}" varStatus="loop">
-            <tr>
-                <td>${loop.count}</td>
-                <td>${item.value.id}</td>
-                <td>${item.value.login}</td>
-                <td>${item.value.password}</td>
-                <td class="text-center">
-                    <a href="<c:url value="/users/details?id=${item.key}" />">Edit</a>
-                    <a href="<c:url value="/users/delete?id=${item.key}" />">Delete</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <div class="text-right">
-        <a class="button align-right" href="<c:url value="/users/details"/>"><i
-                class="fa fa-user-plus"></i> Ajouter</a>
-    </div>
-</div>
+<c:choose>
+    <c:when test="${contactBean.user.login == 'Admin' && contactBean.isConnected(requestScope)}">
+        <div class="row small-8 small-centered">
+            <table class="unstriped">
+                <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Password</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="item" items="${contactBean.users}" varStatus="loop">
+                    <tr>
+                        <td>${loop.count}</td>
+                        <td>${item.value.id}</td>
+                        <td>${item.value.login}</td>
+                        <td>${item.value.password}</td>
+                        <td class="text-center">
+                            <a href="<c:url value="/users/details?id=${item.key}" />">Edit</a>
+                            <a href="<c:url value="/users/delete?id=${item.key}" />">Delete</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a class="button align-right" href="<c:url value="/users/details"/>"><i
+                        class="fa fa-user-plus"></i> Ajouter</a>
+            </div>
+        </div>
+    </c:when>
+    <c:when test="${contactBean.user.login == 'Admin' && contactBean.isConnected(requestScope)}}">
+        <div class="text-center">
+            <p>Vous êtes pas accès à cette page, vous n'êtes pas admin</p>
+            <a class="button align-center" href="<c:url value="/game"/>"><i
+                    class="fa fa-user-plus"></i> Retour au jeu</a>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="text-center">
+            <p>Vous êtes pas accès à cette page, vous n'êtes pas admin, connectez-vous en tant qu'admin dans la page de connection</p>
+            <a class="button align-center" href="<c:url value="/login"/>"><i
+                    class="fa fa-user-plus"></i> Aller a la page de connection</a>
+        </div>
+    </c:otherwise>
+</c:choose>
 <script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/foundation.min.js"></script>
 <script>
