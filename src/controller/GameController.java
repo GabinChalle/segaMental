@@ -13,12 +13,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = {"/game"})
+@WebServlet(urlPatterns = {"/game", "/test", "/list"})
 public class GameController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());
     private static final String PAGE_GAME_JSP = "/WEB-INF/jsp/game.jsp";
-    private static final String PAGE_SCORES_LIST_SLT = "/scores";
+    private static final String PAGE_SCORES_LIST_SLT = "/WEB-INF/jsp/score_list.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,12 +37,14 @@ public class GameController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GameBean bean = new GameBean();
-        if(request.getServletPath().equals("/game")){
-            System.out.println("Ok");
+        if(request.getServletPath().equals("/list")){
+            request.getServletContext().getRequestDispatcher(PAGE_SCORES_LIST_SLT).forward(request, response);
         }
-        /*if (bean.setUserFromForm(request)) {
-            response.sendRedirect(request.getContextPath() + PAGE_USERS_LIST_SLT);
-        } else {
+        else if (request.getServletPath().equals("/test")) {
+            bean.getBinaryExp();
+            response.sendRedirect(request.getContextPath() + PAGE_GAME_JSP);
+        }
+        /*else {
             request.setAttribute("contactBean", bean);
             request.getServletContext().getRequestDispatcher(PAGE_CONTACTS_DETAILS_JSP).forward(request, response);
         }*/
