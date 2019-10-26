@@ -13,11 +13,10 @@ import java.util.Map;
 
 public class GameBean implements Serializable {
 
-    private static final String RESULTS = "result";
     private Map operations;
-   private OperationDAO operationDAO;
+    private OperationDAO operationDAO;
     private static final String ATT_SESS_SCORES_LIST = "scoresList";
-   private Operation currentOperation;
+    private Operation currentOperation;
 
     public GameBean() {
     }
@@ -29,7 +28,6 @@ public class GameBean implements Serializable {
     public String getUnaryExp() {
         return Calcul.genererCalculUnaire();
     }
-
 
     public void loadScoreList(HttpServletRequest request) {
         HttpSession session = request.getSession();

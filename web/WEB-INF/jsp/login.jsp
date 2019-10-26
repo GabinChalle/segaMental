@@ -60,7 +60,7 @@
 						<span class="input-group-label">
 							<i class="fa fa-user"></i>
 						</span>
-					<input class="input-group-field" type="text" placeholder="Login" name="form-username"
+					<input class="input-group-field" type="text" placeholder="Login" name="form-name"
 						   value=""/>
 				</div>
 				<div class="input-group">

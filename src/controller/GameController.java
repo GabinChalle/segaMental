@@ -18,8 +18,7 @@ public class GameController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());
     private static final String PAGE_GAME_JSP = "/WEB-INF/jsp/game.jsp";
-    private static final String PAGE_CONTACTS_DETAILS_JSP = "/WEB-INF/jsp/users_details.jsp";
-    private static final String PAGE_CONTACTS_LIST_SLT = "/user";
+    private static final String PAGE_SCORES_LIST_SLT = "/scores";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,14 +36,12 @@ public class GameController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         GameBean bean = new GameBean();
-
         if(request.getServletPath().equals("/game")){
             System.out.println("Ok");
         }
         /*if (bean.setUserFromForm(request)) {
-            response.sendRedirect(request.getContextPath() + PAGE_CONTACTS_LIST_SLT);
+            response.sendRedirect(request.getContextPath() + PAGE_USERS_LIST_SLT);
         } else {
             request.setAttribute("contactBean", bean);
             request.getServletContext().getRequestDispatcher(PAGE_CONTACTS_DETAILS_JSP).forward(request, response);
