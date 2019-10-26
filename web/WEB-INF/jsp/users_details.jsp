@@ -13,7 +13,7 @@
 <body>
 <div class="callout large primary">
     <div class="row column text-center">
-        <h1>${ userBean.currentUser.login } - Détails</h1>
+        <h1>${ userBean.currentUser.login }  Détails</h1>
     </div>
 </div>
 <div class="row small-5 small-centered">

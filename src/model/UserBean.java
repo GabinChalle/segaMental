@@ -58,7 +58,6 @@ public class UserBean implements Serializable {
             users = new HashMap<>();
             try {
                 users = userDAO.findByAll();
-                System.out.println(users);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -28,7 +28,39 @@
 				<input type="text" name="result">
 				<button type="submit" name="next" value="next">Prochain</button>
 			</form>
-
 		</div>
+	<div class="callout large primary">
+		<div class="row column text-center">
+			<h1>Admin - Liste des utilisateurs</h1>
+		</div>
+	</div>
+	<div class="row small-8 small-centered">
+		<table class="unstriped">
+			<thead>
+			<tr>
+				<th>N°</th>
+				<th>Id</th>
+				<th>Score</th>
+				<th>Utilisateur</th>
+				<th class="text-center">Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="itemOp" items="${gameBean.operations}" varStatus="loop">
+				<c:forEach var="itemUser" items="${userBean.users}" varStatus="loop">
+				<tr>
+					<td>${loop.count}</td>
+					<td>${itemOp.value.id}</td>
+					<td>${itemOp.value.score}</td>
+					<td>${itemUser.value.login}</td>
+					<td class="text-center">
+						<a href="<c:url value="/users/delete?id=${item.key}" />">Détails</a>
+					</td>
+				</tr>
+			</c:forEach>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>
 	</body>
 </html>

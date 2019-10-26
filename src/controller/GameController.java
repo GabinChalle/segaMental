@@ -25,7 +25,7 @@ public class GameController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         UserBean bean = new UserBean();
-        request.setAttribute("contactBean", bean);
+        request.setAttribute("gameBean", bean);
 
         String path = request.getServletPath();
         LOGGER.log(Level.INFO, "In the doGet for {0}", path);
