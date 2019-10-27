@@ -1,6 +1,7 @@
 package model;
 
 import bo.Calcul;
+import bo.Expression;
 import bo.Operation;
 import dal.jdbc.OperationDAO;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +29,25 @@ public class GameBean implements Serializable {
 
     public String getUnaryExp() {
         return Calcul.genererCalculUnaire();
+    }
+
+    // Création d'un test avec 10 calculs
+    public ArrayList<Expression> createTest() {
+        ArrayList<Expression> test = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            String calcul;
+            if(i<5) {
+                calcul = Calcul.genererCalculBinaire();
+            } else {
+                calcul = Calcul.genererCalculUnaire();
+            }
+            Double resAttendu = Calcul.calculer(calcul);
+            Expression exp = new Expression();
+            exp.setLibelle(calcul);
+            exp.setResAttendu(resAttendu);
+            test.add(exp);
+        }
+        return test;
     }
 
     public void loadScoreList(HttpServletRequest request) {

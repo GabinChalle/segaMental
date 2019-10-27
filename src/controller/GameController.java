@@ -23,12 +23,12 @@ public class GameController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserBean bean = new UserBean();
+        GameBean bean = new GameBean();
         request.setAttribute("gameBean", bean);
 
         String path = request.getServletPath();
         LOGGER.log(Level.INFO, "In the doGet for {0}", path);
-        String realPath = path.substring(path.lastIndexOf("/") + 1);
+        //String realPath = path.substring(path.lastIndexOf("/") + 1);
         request.getServletContext().getRequestDispatcher(PAGE_GAME_JSP).forward(request, response);
     }
 
@@ -45,11 +45,11 @@ public class GameController extends HttpServlet {
             //System.out.println(action);
             //Enumeration<String> names = request.getAttributeNames();
             //String oui = "oui";
-            if(request.getAttribute("suivant") != null){
-                page --;
-            }
-            else{
+            if(request.getParameter("next") != null){
                 page ++;
+            }
+            else if(request.getParameter("precedent") != null){
+                page --;
             }
             bean.getBinaryExp();
             request.getServletContext().getRequestDispatcher(PAGE_GAME_JSP + "?page=" + page).forward(request, response);

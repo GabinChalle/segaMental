@@ -1,4 +1,6 @@
 <%@ page import="org.w3c.dom.ls.LSOutput" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="bo.Expression" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,53 +15,63 @@
 </head>
 <body>
 <div class="callout large primary">
-	<div class="row column text-center">
-		<h1> Faites le test </h1>
-	</div>
+    <div class="row column text-center">
+        <h1> Faites le test </h1>
+    </div>
 </div>
 
 <div class="row small-5 small-centered">
-	<form method="post" action="/segaMental/list">
-		<button class="button expanded" type="submit"> Voir la liste des scores </button>
-	</form>
+    <form method="post" action="/segaMental/list">
+        <button class="button expanded" type="submit"> Voir la liste des scores</button>
+    </form>
+    <jsp:useBean id="gameBean" class="model.GameBean" scope="request"/>
+    <%
+        if (request.getParameter("page") != null) {
+            if (Integer.parseInt(request.getParameter("page")) > 0) {
 
-	<%
-		if(request.getParameter("page") != null){
-			if(Integer.parseInt(request.getParameter("page")) > 0){
-	%>
-		<form method="post" action="/segaMental/test?page=<%= request.getParameter("page")%>">
-			<p> Affichage du calcul </p>
-			<input type="text" name="result">
+    %>
+    <form method="post" action="/segaMental/test?page=<%= request.getParameter("page")%>">
+        <p><%= gameBean.createTest().get(Integer.parseInt(request.getParameter("page")) - 1).getLibelle() %>
+        </p>
+        <input type="text" name="result">
 
-			<button class="button expanded" type="submit" name="precedent"> Précédent </button>
-			<button class="button expanded" type="submit" name="next"> Suivant </button>
-		</form>
-	<%
-			}else{
-	%>
-		<form method="post" action="/segaMental/test?page=1">
-			<button class="button expanded" type="submit"> Commencer le test </button>
-		</form>
-	<%
-			}
-		}
-		else{
-	%>
-		<form method="post" action="/segaMental/test?page=1">
-			<button class="button expanded" type="submit"> Commencer le test </button>
-		</form>
-	<%
-		}
-	%>
-
+        <button class="button expanded" type="submit" name="precedent"> Précédent</button>
+        <%
+            if (Integer.parseInt(request.getParameter("page")) > 9) {
+        %>
+        <button class="button expanded" type="submit" name="fin"> Fin</button>
+        <%
+        } else {
+        %>
+        <button class="button expanded" type="submit" name="next"> Suivant</button>
+        <%
+            }
+        %>
+    </form>
+    <%
+    } else {
+    %>
+    <form method="post" action="/segaMental/test?page=1">
+        <button class="button expanded" type="submit"> Commencer le test</button>
+    </form>
+    <%
+        }
+    } else {
+    %>
+    <form method="post" action="/segaMental/test?page=1">
+        <button class="button expanded" type="submit"> Commencer le test</button>
+    </form>
+    <%
+        }
+    %>
 
 
 </div>
 <script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/foundation.min.js"></script>
 <script>
-	$(document).foundation();
-	document.documentElement.setAttribute('data-useragent', navigator.userAgent);
+    $(document).foundation();
+    document.documentElement.setAttribute('data-useragent', navigator.userAgent);
 </script>
 </body>
 </html>
