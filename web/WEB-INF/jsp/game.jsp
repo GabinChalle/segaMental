@@ -1,6 +1,7 @@
 <%@ page import="org.w3c.dom.ls.LSOutput" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="bo.Expression" %>
+<%@ page import="model.GameBean" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,14 +25,14 @@
     <form method="post" action="/segaMental/list">
         <button class="button expanded" type="submit"> Voir la liste des scores</button>
     </form>
-    <jsp:useBean id="gameBean" class="model.GameBean" scope="request"/>
     <%
+		GameBean gameBean = (GameBean) request.getAttribute("gameBean");
         if (request.getParameter("page") != null) {
             if (Integer.parseInt(request.getParameter("page")) > 0) {
 
     %>
     <form method="post" action="/segaMental/test?page=<%= request.getParameter("page")%>">
-        <p><%= gameBean.createTest().get(Integer.parseInt(request.getParameter("page")) - 1).getLibelle() %>
+        <p><%= gameBean.getExpressions().get(Integer.parseInt(request.getParameter("page")) - 1).getLibelle() %>
         </p>
         <input type="text" name="result">
 

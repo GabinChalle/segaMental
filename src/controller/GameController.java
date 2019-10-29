@@ -20,10 +20,11 @@ public class GameController extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());
     private static final String PAGE_GAME_JSP = "/WEB-INF/jsp/game.jsp";
     private static final String PAGE_SCORES_LIST_SLT = "/WEB-INF/jsp/score_list.jsp";
+    private GameBean bean = new GameBean();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        GameBean bean = new GameBean();
+
         request.setAttribute("gameBean", bean);
 
         String path = request.getServletPath();
@@ -34,7 +35,9 @@ public class GameController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        GameBean bean = new GameBean();
+
+        request.setAttribute("gameBean", bean);
+
         if(request.getServletPath().equals("/list")){
                 bean.loadScoreList(request);
             request.getServletContext().getRequestDispatcher(PAGE_SCORES_LIST_SLT).forward(request, response);
@@ -46,6 +49,9 @@ public class GameController extends HttpServlet {
             //Enumeration<String> names = request.getAttributeNames();
             //String oui = "oui";
             if(request.getParameter("next") != null){
+                if(request.getParameter("result") != null) {
+                    bean.getExpressions().get(page).setResDonnee(Double.parseDouble(request.getParameter("result")));
+                }
                 page ++;
             }
             else if(request.getParameter("precedent") != null){

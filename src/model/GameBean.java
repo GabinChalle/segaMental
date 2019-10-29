@@ -19,8 +19,14 @@ public class GameBean implements Serializable {
     private OperationDAO operationDAO;
     private static final String ATT_SESS_SCORES_LIST = "scorelist";
     private Operation currentOperation;
+    private ArrayList<Expression> expressions;
 
     public GameBean() {
+        expressions = createExpression();
+    }
+
+    public ArrayList<Expression> getExpressions() {
+        return expressions;
     }
 
     public String getBinaryExp() {
@@ -32,7 +38,7 @@ public class GameBean implements Serializable {
     }
 
     // Création d'un test avec 10 calculs
-    public ArrayList<Expression> createTest() {
+    public ArrayList<Expression> createExpression() {
         ArrayList<Expression> test = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             String calcul;
