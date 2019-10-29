@@ -29,21 +29,6 @@ public class UserBean implements Serializable {
     public UserBean() {
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getAuthResult() {
-        return authResult;
-    }
-
-    public void setAuthResult(String authResult) {
-        this.authResult = authResult;
-    }
 
     public boolean isConnected(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -143,6 +128,7 @@ public class UserBean implements Serializable {
         }
     }
 
+    //getters et setters
     public User getCurrentUser() {
         return currentUser;
     }
@@ -158,4 +144,21 @@ public class UserBean implements Serializable {
     public void setUsers(Map<String, User> users) {
         this.users = users;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getAuthResult() {
+        return authResult;
+    }
+
+    public void setAuthResult(String authResult) {
+        this.authResult = authResult;
+    }
+
 }

@@ -16,6 +16,7 @@ public class Expression {
         this.resDonnee = resDonnee;
     }
 
+    //getters et setters
     public int getId() {
         return id;
     }

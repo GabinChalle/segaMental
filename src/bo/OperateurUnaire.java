@@ -11,8 +11,6 @@ public enum OperateurUnaire {
 
         private static final List<OperateurUnaire> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
         private static final int SIZE = VALUES.size();
-
-
         public static OperateurUnaire randomOpperation()  {
             return VALUES.get(new Random().nextInt(SIZE));
         }

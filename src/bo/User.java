@@ -15,7 +15,8 @@ public class User implements Serializable {
 		this.login = login;
 		this.password = password;
 	}
-	
+
+	//getters et setters
 	public int getId() {
 		return id;
 	}

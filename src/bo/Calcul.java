@@ -147,7 +147,6 @@ public class Calcul {
                 }
             }
         }
-
         return expression;
     }
 }

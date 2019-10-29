@@ -42,7 +42,7 @@ public class GameBean implements Serializable {
         ArrayList<Expression> test = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             String calcul;
-            if(i<5) {
+            if (i < 5) {
                 calcul = Calcul.genererCalculBinaire();
             } else {
                 calcul = Calcul.genererCalculUnaire();
@@ -63,7 +63,7 @@ public class GameBean implements Serializable {
             operations = new HashMap<>();
             try {
                 operations = operationDAO.findByAll();
-                System.out.println("/////////////////////////////"+operations);
+                System.out.println("/////////////////////////////" + operations);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -81,5 +81,38 @@ public class GameBean implements Serializable {
                 currentOperation = (Operation) operations.get(id);
             }
         }
+    }
+
+    //getters and setters
+    public Map getOperations() {
+        return operations;
+    }
+
+    public void setOperations(Map operations) {
+        this.operations = operations;
+    }
+
+    public OperationDAO getOperationDAO() {
+        return operationDAO;
+    }
+
+    public void setOperationDAO(OperationDAO operationDAO) {
+        this.operationDAO = operationDAO;
+    }
+
+    public static String getAttSessScoresList() {
+        return ATT_SESS_SCORES_LIST;
+    }
+
+    public Operation getCurrentOperation() {
+        return currentOperation;
+    }
+
+    public void setCurrentOperation(Operation currentOperation) {
+        this.currentOperation = currentOperation;
+    }
+
+    public void setExpressions(ArrayList<Expression> expressions) {
+        this.expressions = expressions;
     }
 }

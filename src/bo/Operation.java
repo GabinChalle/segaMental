@@ -13,6 +13,7 @@ public class Operation {
         this.score = score;
     }
 
+    // getters et setters
     public int getId() {
         return id;
     }

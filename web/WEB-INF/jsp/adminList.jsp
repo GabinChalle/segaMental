@@ -60,7 +60,7 @@
     </c:when>
     <c:otherwise>
         <div class="text-center">
-            <p>Vous êtes pas accès à cette page, vous n'êtes pas admin, connectez-vous en tant qu'admin dans la page de connection</p>
+            <p>Vous n'avez pas accès à cette page, vous n'êtes pas admin, connectez-vous en tant qu'admin dans la page de connection</p>
             <a class="button align-center" href="<c:url value="/login"/>"><i
                     class="fa fa-user-plus"></i> Aller a la page de connection</a>
         </div>
