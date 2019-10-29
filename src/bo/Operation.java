@@ -4,6 +4,7 @@ public class Operation {
 
     private int id;
     private int score;
+    private int idUser;
 
     public Operation() {
     }
@@ -28,5 +29,13 @@ public class Operation {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 }

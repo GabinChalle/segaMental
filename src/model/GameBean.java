@@ -17,7 +17,7 @@ public class GameBean implements Serializable {
 
     private Map operations;
     private OperationDAO operationDAO;
-    private static final String ATT_SESS_SCORES_LIST = "scorelist";
+    private static final String ATT_SESS_SCORES_LIST = "scoreslist";
     private Operation currentOperation;
     private ArrayList<Expression> expressions;
 
@@ -58,15 +58,18 @@ public class GameBean implements Serializable {
 
     public void loadScoreList(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        operations = (Map<String, Operation>) session.getAttribute(ATT_SESS_SCORES_LIST);
+        operations = (Map<String, Operation>)  session.getAttribute(ATT_SESS_SCORES_LIST);
+        System.out.println("1 "+operations);
         if (null == operations) {
             operations = new HashMap<>();
+            System.out.println("2 "+ operations);
             try {
                 operations = operationDAO.findByAll();
-                System.out.println("/////////////////////////////" + operations);
+                System.out.println("3 "+ operations);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            System.out.println("4 "+ operations);
             session.setAttribute(ATT_SESS_SCORES_LIST, operations);
         }
     }

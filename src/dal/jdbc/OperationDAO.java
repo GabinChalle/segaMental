@@ -10,8 +10,8 @@ import java.util.*;
 
 public class OperationDAO implements IDAO<Long, Operation> {
 
-    private static final String INSERT_QUERY = "INSERT INTO operations(id_op, score) VALUES (?, ?)";
-    private static final String UPDATE_QUERY = "UPDATE operations SET score = ? WHERE id = ?";
+    private static final String INSERT_QUERY = "INSERT INTO operations(id_op, score, id_user) VALUES (?, ?, ?)";
+    private static final String UPDATE_QUERY = "UPDATE operations SET score = ? , id_user = ? WHERE id = ?";
     private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id= ? ";
     private static final String FIND_QUERY = "SELECT * from operations Where id = ?";
     private static final String FINDALL_QUERY = "SELECT * from operations";
@@ -23,6 +23,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
             try (PreparedStatement ps = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, object.getId());
                 ps.setInt(2, object.getScore());
+                ps.setInt(3, object.getIdUser());
                 ps.executeUpdate();
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -39,6 +40,8 @@ public class OperationDAO implements IDAO<Long, Operation> {
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(UPDATE_QUERY)) {
                 ps.setInt(1, object.getScore());
+                ps.setInt(2, object.getIdUser());
+                ps.setInt(3, object.getId());
                 ps.executeUpdate();
             }
         }
@@ -82,6 +85,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
                         operation = new Operation();
                         operation.setId(rs.getInt("id_op"));
                         operation.setScore(rs.getInt("score"));
+                        operation.setIdUser(rs.getInt("id_user"));
                         list.put(UUID.randomUUID().toString(), operation);
                     }
                 }

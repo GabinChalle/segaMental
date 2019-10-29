@@ -50,7 +50,7 @@
 			</c:if>
 			<!-- fin de connection-->
 			<div class="text-center">
-			<h3>OU</h3>
+			<h4>OU</h4>
 			</div>			<!-- début de Création de compte -->
 			<form method="POST" action="/segaMental/signup">
 			<input type="hidden" value="${requestScope.currentPerson.id}" name="form-id"/>
@@ -74,7 +74,7 @@
 			<button class="button expanded">Valider</button>
 			</form>
 			<!-- fin de création de compte-->
-
+			<h4>Connexion à l'interface administrateur</h4>
 			<form method="POST" action="/segaMental/admin">
 				<input type="hidden" name="form-username" value="admin"/>
 				<div class="form-icons">

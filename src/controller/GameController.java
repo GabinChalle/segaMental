@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,11 +21,10 @@ public class GameController extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());
     private static final String PAGE_GAME_JSP = "/WEB-INF/jsp/game.jsp";
     private static final String PAGE_SCORES_LIST_SLT = "/WEB-INF/jsp/score_list.jsp";
-    private GameBean bean = new GameBean();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        GameBean bean = new GameBean();
         request.setAttribute("gameBean", bean);
 
         String path = request.getServletPath();
@@ -35,11 +35,16 @@ public class GameController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        GameBean bean = new GameBean();
         request.setAttribute("gameBean", bean);
 
         if(request.getServletPath().equals("/list")){
+            System.out.println("doPOst gameControler");
+            try {
                 bean.loadScoreList(request);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             request.getServletContext().getRequestDispatcher(PAGE_SCORES_LIST_SLT).forward(request, response);
         }
         else if (request.getServletPath().equals("/test")) {
