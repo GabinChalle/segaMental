@@ -9,9 +9,15 @@ public class Operation {
     public Operation() {
     }
 
-    public Operation(int id, int score) {
+    public Operation(int id, int score, int id_user) {
         this.id = id;
         this.score = score;
+        this.idUser = id_user;
+    }
+
+    public Operation(int score, int idUser) {
+        this.score = score;
+        this.idUser = idUser;
     }
 
     // getters et setters

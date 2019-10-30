@@ -37,6 +37,7 @@ INSERT INTO utilisateurs (pseudo, PASSWORD)
  ('corentin', 'gautier'),
  ('yves', 'guerin'),
  ('admin','kze369');
+
  
  
 

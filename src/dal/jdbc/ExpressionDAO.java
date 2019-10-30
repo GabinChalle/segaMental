@@ -10,7 +10,7 @@ import java.util.*;
 
 public class ExpressionDAO implements IDAO<Long, Expression> {
 
-    private static final String INSERT_QUERY = "INSERT INTO expressions(id_calcul, libelle, res_attendu, res_donnee, id_op) VALUES (?,?,?,?,?)";
+    private static final String INSERT_QUERY = "INSERT INTO expressions(libelle, res_attendu, res_donnee, id_op) VALUES (?,?,?,?)";
     private static final String UPDATE_QUERY = "UPDATE expressions SET libelle=?, res_attendu = ?, res_donnee= ? WHERE id_calcul = ?";
     private static final String REMOVE_QUERY = "DELETE FROM expressions WHERE id_calcul= ? ";
     private static final String FIND_QUERY = "SELECT * from expressions Where id_calcul = ?";
@@ -21,12 +21,12 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, object.getId());
-                ps.setString(2, object.getLibelle());
-                ps.setDouble(3, object.getResAttendu());
-                ps.setDouble(4, object.getResDonnee());
-                ps.setDouble(4, object.getResDonnee());
-                ps.setInt(1, object.getIdOp());
+                //ps.setInt(1, object.getId());
+                ps.setString(1, object.getLibelle());
+                ps.setDouble(2, object.getResAttendu());
+                ps.setDouble(3, object.getResDonnee());
+                ps.setInt(4, object.getIdOp());
+                //ps.setInt(1, object.getIdOp());
                 ps.executeUpdate();
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {

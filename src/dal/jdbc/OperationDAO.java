@@ -10,10 +10,10 @@ import java.util.*;
 
 public class OperationDAO implements IDAO<Long, Operation> {
 
-    private static final String INSERT_QUERY = "INSERT INTO operations(id_op, score, id_user) VALUES (?, ?, ?)";
-    private static final String UPDATE_QUERY = "UPDATE operations SET score = ? , id_user = ? WHERE id = ?";
-    private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id= ? ";
-    private static final String FIND_QUERY = "SELECT * from operations Where id = ?";
+    private static final String INSERT_QUERY = "INSERT INTO operations(score, id_user) VALUES (?, ?)";
+    private static final String UPDATE_QUERY = "UPDATE operations SET score = ? , id_user = ? WHERE id_op= ?";
+    private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id_op= ? ";
+    private static final String FIND_QUERY = "SELECT * from operations Where id_op = ?";
     //private static final String FINDALL_QUERY = "SELECT pseudo, score FROM operations inner join utilisateurs on operations.id_user = utilisateurs.id_user";
     private static final String FINDALL_QUERY = "SELECT * FROM operations";
 
@@ -22,9 +22,9 @@ public class OperationDAO implements IDAO<Long, Operation> {
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, object.getId());
-                ps.setInt(2, object.getScore());
-                ps.setInt(3, object.getIdUser());
+                // ps.setInt(1, object.getId());
+                ps.setInt(1, object.getScore());
+                ps.setInt(2, object.getIdUser());
                 ps.executeUpdate();
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -81,8 +81,10 @@ public class OperationDAO implements IDAO<Long, Operation> {
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(FINDALL_QUERY)) {
+                System.out.println("11"+ps);
                 try (ResultSet rs = ps.executeQuery()) {
-                    System.out.println("BONJOUR je suis find by all");
+                    System.out.println("12"+rs);
+                    System.out.println("BONJOUR je suis dans le find by all");
                     while (rs.next()) {
                         Operation operation;
                         operation = new Operation();

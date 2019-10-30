@@ -36,7 +36,6 @@ public class GameBean implements Serializable {
     public String getUnaryExp() {
         return Calcul.genererCalculUnaire();
     }
-
     // Création d'un test avec 10 calculs
     public ArrayList<Expression> createExpression() {
         ArrayList<Expression> test = new ArrayList<>();
@@ -59,17 +58,13 @@ public class GameBean implements Serializable {
     public void loadScoreList(HttpServletRequest request) {
         HttpSession session = request.getSession();
         operations = (Map<String, Operation>)  session.getAttribute(ATT_SESS_SCORES_LIST);
-        System.out.println("1 "+operations);
         if (null == operations) {
             operations = new HashMap<>();
-            System.out.println("2 "+ operations);
             try {
                 operations = operationDAO.findByAll();
-                System.out.println("3 "+ operations);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            System.out.println("4 "+ operations);
             session.setAttribute(ATT_SESS_SCORES_LIST, operations);
         }
     }

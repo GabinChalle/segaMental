@@ -2,6 +2,9 @@ package controller;
 
 
 import bo.Expression;
+import bo.Operation;
+import dal.jdbc.ExpressionDAO;
+import dal.jdbc.OperationDAO;
 import model.GameBean;
 import model.UserBean;
 
@@ -10,10 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Request;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +30,10 @@ public class GameController extends HttpServlet {
     private static final String PAGE_SCORES_LIST_SLT = "/WEB-INF/jsp/score_list.jsp";
     private static final String PAGE_SCORE = "/WEB-INF/jsp/score.jsp";
     private GameBean bean = new GameBean();
-
+    private UserBean userBean = new UserBean();
+    private OperationDAO operationDAO = new OperationDAO();
+    private ExpressionDAO expressionDAO = new ExpressionDAO();
+    private int id = 0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("gameBean", bean);
@@ -38,22 +46,39 @@ public class GameController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        userBean = ( UserBean ) request.getAttribute( "userBean" );
         request.setAttribute("gameBean", bean);
         if(request.getServletPath().equals("/score")){
             System.out.println("doPOst gameControler");
             try {
                 int score = 0;
+                Operation operation = new Operation(score,1);
+                System.out.println(operation.getId());
+                operationDAO.create(operation);
+                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
                 ArrayList<Expression> expressions = bean.getExpressions();
-                for (Expression exp: expressions) {
-                    System.out.println(exp.getResDonnee());
-                    System.out.println(exp.getResAttendu());
+                System.out.println("expressions "+ expressions);
+                 for (Expression exp: expressions) {
                     if (exp.getResDonnee() == exp.getResAttendu()) {
                         score ++;
                     }
-                    System.out.println(score);
+                    exp.setIdOp(operation.getId());
+                    System.out.println("exp : "+exp.getId()+" "+exp.getIdOp()+ " "+exp.getResDonnee()+" "+ exp.getResAttendu()+ "  // "+exp.getLibelle());
+                    try {
+                        expressionDAO.create(exp);
+                    }catch(SQLException e){
+                        e.printStackTrace();
+                    }
                 }
+                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
+                operation.setScore(score);
+                System.out.println("operation.getId()"+ operation.getId());
+
+                operationDAO.update(operation);
+                id++;
                 request.setAttribute("expressions", expressions);
                 request.setAttribute("score", score);
+
             }catch(Exception e){
                 e.printStackTrace();
             }
