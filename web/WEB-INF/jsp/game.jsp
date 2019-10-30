@@ -38,13 +38,15 @@
 
         <button class="button expanded" type="submit" name="precedent"> Précédent</button>
         <%
-            if (Integer.parseInt(request.getParameter("page")) > 9) {
+            if (Integer.parseInt(request.getParameter("page")) < 10) {
         %>
-        <button class="button expanded" type="submit" name="fin"> Fin</button>
+		<button class="button expanded" type="submit" name="next"> Suivant</button>
         <%
         } else {
         %>
-        <button class="button expanded" type="submit" name="next"> Suivant</button>
+	</form>
+	<form method="post" action="/segaMental/score">
+	<button class="button expanded" type="submit" name="fin"> Fin</button>
         <%
             }
         %>

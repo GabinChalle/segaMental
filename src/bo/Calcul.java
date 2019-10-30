@@ -92,7 +92,11 @@ public class Calcul {
                     expression += "- ";
                     break;
                 case DIVISE:
-                    expression += "/ ";
+                    if(nombres[i+1]==0) {
+                        expression += "* ";
+                    } else {
+                        expression += "/ ";
+                    }
                     break;
             }
         }
@@ -142,7 +146,11 @@ public class Calcul {
                         expression += " - ";
                         break;
                     case DIVISE:
-                        expression += " / ";
+                        if(nombres[i]==0) {
+                            expression += " * ";
+                        } else {
+                            expression += " / ";
+                        }
                         break;
                 }
             }

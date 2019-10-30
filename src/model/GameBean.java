@@ -16,7 +16,7 @@ import java.util.Map;
 public class GameBean implements Serializable {
 
     private Map operations;
-    private OperationDAO operationDAO;
+    private OperationDAO operationDAO = new OperationDAO();
     private static final String ATT_SESS_SCORES_LIST = "scoreslist";
     private Operation currentOperation;
     private ArrayList<Expression> expressions;

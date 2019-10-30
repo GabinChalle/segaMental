@@ -5,15 +5,17 @@ public class Expression {
     private String libelle;
     private double resAttendu;
     private double resDonnee;
+    private int idOp;
 
     public Expression() {
     }
 
-    public Expression(int id, String libelle, double resAttendu, double resDonnee) {
+    public Expression(int id, String libelle, double resAttendu, double resDonnee, int idOp) {
         this.id = id;
         this.libelle = libelle;
         this.resAttendu = resAttendu;
         this.resDonnee = resDonnee;
+        this.idOp = idOp;
     }
 
     //getters et setters
@@ -47,5 +49,13 @@ public class Expression {
 
     public void setResDonnee(double resDonnee) {
         this.resDonnee = resDonnee;
+    }
+
+    public int getIdOp() {
+        return idOp;
+    }
+
+    public void setIdOp(int idOp) {
+        this.idOp = idOp;
     }
 }
