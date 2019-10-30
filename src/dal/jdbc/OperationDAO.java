@@ -14,7 +14,8 @@ public class OperationDAO implements IDAO<Long, Operation> {
     private static final String UPDATE_QUERY = "UPDATE operations SET score = ? , id_user = ? WHERE id = ?";
     private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id= ? ";
     private static final String FIND_QUERY = "SELECT * from operations Where id = ?";
-    private static final String FINDALL_QUERY = "SELECT * from operations";
+    //private static final String FINDALL_QUERY = "SELECT pseudo, score FROM operations inner join utilisateurs on operations.id_user = utilisateurs.id_user";
+    private static final String FINDALL_QUERY = "SELECT * FROM operations";
 
     @Override
     public void create(Operation object) throws SQLException {
@@ -75,11 +76,13 @@ public class OperationDAO implements IDAO<Long, Operation> {
 
     @Override
     public Map findByAll() throws SQLException {
+        System.out.println("BONJOUR je suis find by all");
         Map<String, Operation> list = new HashMap<>();
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(FINDALL_QUERY)) {
                 try (ResultSet rs = ps.executeQuery()) {
+                    System.out.println("BONJOUR je suis find by all");
                     while (rs.next()) {
                         Operation operation;
                         operation = new Operation();
