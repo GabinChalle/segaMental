@@ -44,13 +44,13 @@
         <%
         } else {
         %>
-	</form>
-	<form method="post" action="/segaMental/score">
-	<button class="button expanded" type="submit" name="fin"> Fin</button>
+    </form>
+    <form method="post" action="/segaMental/score">
+	    <button class="button expanded" type="submit" name="fin"> Fin</button>
+    </form>
         <%
             }
         %>
-    </form>
     <%
     } else {
     %>

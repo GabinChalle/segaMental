@@ -3,6 +3,7 @@ package model;
 import bo.Calcul;
 import bo.Expression;
 import bo.Operation;
+import dal.jdbc.ExpressionDAO;
 import dal.jdbc.OperationDAO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public class GameBean implements Serializable {
 
     private Map operations;
     private OperationDAO operationDAO = new OperationDAO();
+    private ExpressionDAO expressionDAO = new ExpressionDAO();
     private static final String ATT_SESS_SCORES_LIST = "scoreslist";
     private Operation currentOperation;
     private ArrayList<Expression> expressions;
@@ -79,6 +81,16 @@ public class GameBean implements Serializable {
                 currentOperation = (Operation) operations.get(id);
             }
         }
+    }
+
+    public void operationCreate(Operation operation) throws SQLException {
+        operationDAO.create(operation);
+    }
+    public void expressionCreate(Expression expression) throws SQLException {
+        expressionDAO.create(expression);
+    }
+    public void operationUpdate(Operation operation) throws SQLException {
+        operationDAO.update(operation);
     }
 
     //getters and setters

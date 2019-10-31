@@ -31,8 +31,8 @@ public class GameController extends HttpServlet {
     private static final String PAGE_SCORE = "/WEB-INF/jsp/score.jsp";
     private GameBean bean = new GameBean();
     private UserBean userBean = new UserBean();
-    private OperationDAO operationDAO = new OperationDAO();
-    private ExpressionDAO expressionDAO = new ExpressionDAO();
+    //private OperationDAO operationDAO = new OperationDAO();
+    //private ExpressionDAO expressionDAO = new ExpressionDAO();
     private int id = 0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,28 +53,28 @@ public class GameController extends HttpServlet {
             try {
                 int score = 0;
                 Operation operation = new Operation(score,1);
-                System.out.println(operation.getId());
-                operationDAO.create(operation);
-                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
+                //System.out.println(operation.getId());
+                bean.operationCreate(operation);
+                //System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
                 ArrayList<Expression> expressions = bean.getExpressions();
-                System.out.println("expressions "+ expressions);
+                //System.out.println("expressions "+ expressions);
                  for (Expression exp: expressions) {
                     if (exp.getResDonnee() == exp.getResAttendu()) {
                         score ++;
                     }
                     exp.setIdOp(operation.getId());
-                    System.out.println("exp : "+exp.getId()+" "+exp.getIdOp()+ " "+exp.getResDonnee()+" "+ exp.getResAttendu()+ "  // "+exp.getLibelle());
+                    //System.out.println("exp : "+exp.getId()+" "+exp.getIdOp()+ " "+exp.getResDonnee()+" "+ exp.getResAttendu()+ "  // "+exp.getLibelle());
                     try {
-                        expressionDAO.create(exp);
+                        bean.expressionCreate(exp);
                     }catch(SQLException e){
                         e.printStackTrace();
                     }
                 }
-                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
+                //System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
                 operation.setScore(score);
-                System.out.println("operation.getId()"+ operation.getId());
+                //System.out.println("operation.getId()"+ operation.getId());
 
-                operationDAO.update(operation);
+                bean.operationUpdate(operation);
                 id++;
                 request.setAttribute("expressions", expressions);
                 request.setAttribute("score", score);
