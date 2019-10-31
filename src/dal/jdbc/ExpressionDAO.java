@@ -15,7 +15,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
     private static final String REMOVE_QUERY = "DELETE FROM expressions WHERE id_calcul= ? ";
     private static final String FIND_QUERY = "SELECT * from expressions Where id_calcul = ?";
     private static final String FINDALL_QUERY = "SELECT * from expressions";
-
+    private  static final  String INSERT_INTO = "INSERT INTO expressions(libelle, res_attendu, res_donnee, id_op) VALUES (?, ?, ? , ?), (?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?)";
     @Override
     public void create(Expression object) throws SQLException {
         Connection connection = DAOFactory.getJDBCConnection();
@@ -31,6 +31,33 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
                         object.setId(rs.getInt(1));
+                    }
+                }
+            }
+        }
+    }
+    public void insertInto(ArrayList<Expression> object) throws SQLException {
+        Connection connection = DAOFactory.getJDBCConnection();
+        if (connection != null) {
+            try (PreparedStatement ps = connection.prepareStatement(INSERT_INTO, Statement.RETURN_GENERATED_KEYS)) {
+                int i=0;
+                for (Expression expression : object){
+                    ps.setString(i, expression.getLibelle());
+                    i++;
+                    ps.setDouble(i, expression.getResAttendu());
+                    i++;
+                    ps.setDouble(i, expression.getResDonnee());
+                    i++;
+                    ps.setInt(i, expression.getIdOp());
+                    i++;
+                    ps.executeUpdate();
+                }
+
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        for (Expression expression : object) {
+                            expression.setId(rs.getInt(1));
+                        }
                     }
                 }
             }

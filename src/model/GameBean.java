@@ -86,8 +86,8 @@ public class GameBean implements Serializable {
     public void operationCreate(Operation operation) throws SQLException {
         operationDAO.create(operation);
     }
-    public void expressionCreate(Expression expression) throws SQLException {
-        expressionDAO.create(expression);
+    public void expressionCreate(ArrayList<Expression> expression) throws SQLException {
+        expressionDAO.insertInto(expression);
     }
     public void operationUpdate(Operation operation) throws SQLException {
         operationDAO.update(operation);

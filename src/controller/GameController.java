@@ -53,26 +53,28 @@ public class GameController extends HttpServlet {
             try {
                 int score = 0;
                 Operation operation = new Operation(score,1);
-                //System.out.println(operation.getId());
+                System.out.println(operation.getId());
                 bean.operationCreate(operation);
-                //System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
+                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
                 ArrayList<Expression> expressions = bean.getExpressions();
-                //System.out.println("expressions "+ expressions);
-                 for (Expression exp: expressions) {
+                System.out.println("expressions "+ expressions);
+                ArrayList<Expression> expressionArrayList = new ArrayList<>();
+                for (Expression exp: expressions) {
                     if (exp.getResDonnee() == exp.getResAttendu()) {
                         score ++;
                     }
                     exp.setIdOp(operation.getId());
-                    //System.out.println("exp : "+exp.getId()+" "+exp.getIdOp()+ " "+exp.getResDonnee()+" "+ exp.getResAttendu()+ "  // "+exp.getLibelle());
-                    try {
-                        bean.expressionCreate(exp);
-                    }catch(SQLException e){
-                        e.printStackTrace();
-                    }
+                    System.out.println("exp : "+exp.getId()+" "+exp.getIdOp()+ " "+exp.getResDonnee()+" "+ exp.getResAttendu()+ "  // "+exp.getLibelle());
+                    expressionArrayList.add(exp);
                 }
-                //System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
+                try {
+                    bean.expressionCreate(expressionArrayList);
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
                 operation.setScore(score);
-                //System.out.println("operation.getId()"+ operation.getId());
+                System.out.println("operation.getId()"+ operation.getId());
 
                 bean.operationUpdate(operation);
                 id++;
