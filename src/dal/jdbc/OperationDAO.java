@@ -1,7 +1,6 @@
 package dal.jdbc;
 
 import bo.Operation;
-import bo.User;
 import dal.DAOFactory;
 import dal.IDAO;
 
@@ -21,7 +20,6 @@ public class OperationDAO implements IDAO<Long, Operation> {
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-                // ps.setInt(1, object.getId());
                 ps.setInt(1, object.getScore());
                 ps.setInt(2, object.getIdUser());
                 ps.executeUpdate();
