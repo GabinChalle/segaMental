@@ -3,14 +3,17 @@ package model;
 import bo.Calcul;
 import bo.Expression;
 import bo.Operation;
+import bo.User;
 import dal.jdbc.ExpressionDAO;
 import dal.jdbc.OperationDAO;
+import dal.jdbc.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +22,7 @@ public class GameBean implements Serializable {
     private Map operations;
     private OperationDAO operationDAO = new OperationDAO();
     private ExpressionDAO expressionDAO = new ExpressionDAO();
+    private UserDAO userDAO = new UserDAO();
     private static final String ATT_SESS_SCORES_LIST = "scoreslist";
     private Operation currentOperation;
     private ArrayList<Expression> expressions;
@@ -64,6 +68,20 @@ public class GameBean implements Serializable {
             operations = new HashMap<>();
             try {
                 operations = operationDAO.findByAll();
+                operations.forEach((k,v)->{
+                    System.out.println(v);
+                    Operation ope = (Operation) v;
+                    try {
+                        System.out.println(ope.getIdUser());
+                        System.out.println(userDAO.findById((long) ope.getIdUser()));
+                        User u = userDAO.findById((long) ope.getIdUser());
+                        System.out.println(u.getLogin());
+                        ope.setPseudo(u.getLogin());
+                        System.out.println(ope.getPseudo());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
             } catch (SQLException e) {
                 e.printStackTrace();
             }

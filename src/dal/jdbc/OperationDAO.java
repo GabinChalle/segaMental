@@ -14,7 +14,6 @@ public class OperationDAO implements IDAO<Long, Operation> {
     private static final String UPDATE_QUERY = "UPDATE operations SET score = ? , id_user = ? WHERE id_op= ?";
     private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id_op= ? ";
     private static final String FIND_QUERY = "SELECT * from operations Where id_op = ?";
-    private static final String FIND_USER = "SELECT pseudo, score FROM operations inner join utilisateurs on ? = ?";
     private static final String FINDALL_QUERY = "SELECT * FROM operations";
 
     @Override
@@ -98,19 +97,4 @@ public class OperationDAO implements IDAO<Long, Operation> {
         }
         return list;
     }
-
-    public Operation FindUser(Long aLong) throws SQLException {
-        Operation operation = null;
-        Connection connection = DAOFactory.getJDBCConnection();
-        if (connection != null) {
-            try (PreparedStatement ps = connection.prepareStatement(FIND_USER)) {
-                ps.setLong(1, aLong);
-                try (ResultSet rs = ps.executeQuery()) {
-                    operation.setId(rs.getInt("id_op"));
-                }
-            }
-        }
-        return operation;
-    }
-
 }

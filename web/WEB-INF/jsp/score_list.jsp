@@ -29,7 +29,7 @@
         <c:forEach var="item" items="${gameBean.operations}" varStatus="loop">
             <tr>
                 <td>${loop.count}</td>
-                <td>${item.value.id}</td>
+                <td>${item.value.pseudo}</td>
                 <td>${item.value.score}</td>
             </tr>
         </c:forEach>

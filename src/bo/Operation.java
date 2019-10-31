@@ -5,6 +5,7 @@ public class Operation {
     private int id;
     private int score;
     private int idUser;
+    private String pseudo;
 
     public Operation() {
     }
@@ -43,5 +44,13 @@ public class Operation {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 }
