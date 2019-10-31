@@ -27,7 +27,6 @@ public class LoginController extends HttpServlet {
 			bean = new UserBean();
 			request.setAttribute( "userBean", bean );
 		}
-		//revoir selon le formulaire aussi
 		if ( bean.isConnected( request ) ) {
 			System.out.println("On est connecté");
 			if(request.getServletPath().equals("/login")) {
@@ -62,7 +61,6 @@ public class LoginController extends HttpServlet {
 		}
 		else if(request.getServletPath().equals("/admin")){
 			//cas du bouton admin
-            //System.out.println(request.getHeader("form-name"));
 			bean.authenticate( request );
 			request.setAttribute( "userBean", bean );
 			doGet( request, response );
@@ -70,8 +68,5 @@ public class LoginController extends HttpServlet {
 		else{
 			request.getServletContext().getRequestDispatcher( PAGE_LOGIN_JSP ).forward( request, response );
 		}
-		//System.out.println(request.getServletPath());
-		//if form create
-		//if form admin
 	}
 }

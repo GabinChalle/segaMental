@@ -31,16 +31,12 @@ public class GameController extends HttpServlet {
     private static final String PAGE_SCORE = "/WEB-INF/jsp/score.jsp";
     private GameBean bean = new GameBean();
     private UserBean userBean = new UserBean();
-    //private OperationDAO operationDAO = new OperationDAO();
-    //private ExpressionDAO expressionDAO = new ExpressionDAO();
-    private int id = 0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("gameBean", bean);
 
         String path = request.getServletPath();
         LOGGER.log(Level.INFO, "In the doGet for {0}", path);
-        //String realPath = path.substring(path.lastIndexOf("/") + 1);
         request.getServletContext().getRequestDispatcher(PAGE_GAME_JSP).forward(request, response);
     }
 
@@ -49,22 +45,17 @@ public class GameController extends HttpServlet {
         userBean = ( UserBean ) request.getAttribute( "userBean" );
         request.setAttribute("gameBean", bean);
         if(request.getServletPath().equals("/score")){
-            System.out.println("doPOst gameControler");
             try {
                 int score = 0;
                 Operation operation = new Operation(score,1);
-                System.out.println(operation.getId());
                 bean.operationCreate(operation);
-                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
                 ArrayList<Expression> expressions = bean.getExpressions();
-                System.out.println("expressions "+ expressions);
                 ArrayList<Expression> expressionArrayList = new ArrayList<>();
                 for (Expression exp: expressions) {
                     if (exp.getResDonnee() == exp.getResAttendu()) {
                         score ++;
                     }
                     exp.setIdOp(operation.getId());
-                    System.out.println("exp : "+exp.getId()+" "+exp.getIdOp()+ " "+exp.getResDonnee()+" "+ exp.getResAttendu()+ "  // "+exp.getLibelle());
                     expressionArrayList.add(exp);
                 }
                 try {
@@ -72,12 +63,9 @@ public class GameController extends HttpServlet {
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
-                System.out.println("operation "+operation.getId()+" "+operation.getIdUser()+" "+operation.getScore());
                 operation.setScore(score);
-                System.out.println("operation.getId()"+ operation.getId());
 
                 bean.operationUpdate(operation);
-                id++;
                 request.setAttribute("expressions", expressions);
                 request.setAttribute("score", score);
 
@@ -96,10 +84,7 @@ public class GameController extends HttpServlet {
         }
         else if (request.getServletPath().equals("/test")) {
             int page = Integer.parseInt(request.getParameter("page"));
-            //String action = request.getParameter("suivant");
-            //System.out.println(action);
-            //Enumeration<String> names = request.getAttributeNames();
-            //String oui = "oui";
+
             if(request.getParameter("next") != null){
                 if(!request.getParameter("result").equals("")) {
                     bean.getExpressions().get(page-1).setResDonnee(Double.parseDouble(request.getParameter("result")));
@@ -112,10 +97,6 @@ public class GameController extends HttpServlet {
             bean.getBinaryExp();
             request.getServletContext().getRequestDispatcher(PAGE_GAME_JSP + "?page=" + page).forward(request, response);
         }
-        /*else {
-            request.setAttribute("contactBean", bean);
-            request.getServletContext().getRequestDispatcher(PAGE_CONTACTS_DETAILS_JSP).forward(request, response);
-        }*/
     }
 }
 

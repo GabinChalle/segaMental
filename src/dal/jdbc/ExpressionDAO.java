@@ -1,7 +1,6 @@
 package dal.jdbc;
 
 import bo.Expression;
-import bo.User;
 import dal.DAOFactory;
 import dal.IDAO;
 
@@ -16,17 +15,16 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
     private static final String FIND_QUERY = "SELECT * from expressions Where id_calcul = ?";
     private static final String FINDALL_QUERY = "SELECT * from expressions";
     private  static final  String INSERT_INTO = "INSERT INTO expressions(libelle, res_attendu, res_donnee, id_op) VALUES (?, ?, ? , ?), (?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?),(?, ?, ? , ?)";
+
     @Override
     public void create(Expression object) throws SQLException {
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-                //ps.setInt(1, object.getId());
                 ps.setString(1, object.getLibelle());
                 ps.setDouble(2, object.getResAttendu());
                 ps.setDouble(3, object.getResDonnee());
                 ps.setInt(4, object.getIdOp());
-                //ps.setInt(1, object.getIdOp());
                 ps.executeUpdate();
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
