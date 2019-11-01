@@ -87,7 +87,7 @@ public class UserDAO implements IUserDAO<Long, User> {
 
     @Override
     public User findById(Long aLong) throws SQLException {
-        User user = null;
+        User user = new User();
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
@@ -95,6 +95,7 @@ public class UserDAO implements IUserDAO<Long, User> {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         user.setId(rs.getInt("id_user"));
+                        user.setLogin(rs.getString("pseudo"));
                     }
                 }
             }

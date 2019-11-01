@@ -69,13 +69,9 @@ public class GameBean implements Serializable {
             try {
                 operations = operationDAO.findByAll();
                 operations.forEach((k,v)->{
-                    System.out.println(v);
                     Operation ope = (Operation) v;
                     try {
-                        System.out.println(ope.getIdUser());
-                        System.out.println(userDAO.findById((long) ope.getIdUser()));
                         User u = userDAO.findById((long) ope.getIdUser());
-                        System.out.println(u.getLogin());
                         ope.setPseudo(u.getLogin());
                         System.out.println(ope.getPseudo());
                     } catch (SQLException e) {
