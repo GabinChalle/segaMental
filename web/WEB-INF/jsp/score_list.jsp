@@ -21,7 +21,7 @@
         <thead>
         <tr>
             <th>N°</th>
-            <th>Id</th>
+            <th>Pseudo</th>
             <th>Score</th>
         </tr>
         </thead>

@@ -93,9 +93,12 @@ public class UserDAO implements IUserDAO<Long, User> {
             try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
                 ps.setLong(1, aLong);
                 try (ResultSet rs = ps.executeQuery()) {
-                    user.setId(rs.getInt("id_user"));
+                    if (rs.next()) {
+                        user.setId(rs.getInt("id_user"));
+                    }
                 }
             }
+
         }
         return user;
     }
