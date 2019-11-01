@@ -64,7 +64,11 @@ public class OperationDAO implements IDAO<Long, Operation> {
             try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY)) {
                 ps.setLong(1, aLong);
                 try (ResultSet rs = ps.executeQuery()) {
-                    operation.setId(rs.getInt("id_op"));
+                    if( rs.next()) {
+                        operation.setId(rs.getInt("id_op"));
+                        operation.setIdUser(rs.getInt("id_user"));
+                        operation.setScore(rs.getInt("score"));
+                    }
                 }
             }
         }
@@ -73,15 +77,11 @@ public class OperationDAO implements IDAO<Long, Operation> {
 
     @Override
     public Map findByAll() throws SQLException {
-        System.out.println("BONJOUR je suis find by all");
         Map<String, Operation> list = new HashMap<>();
         Connection connection = DAOFactory.getJDBCConnection();
         if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(FINDALL_QUERY)) {
-                System.out.println("11"+ps);
                 try (ResultSet rs = ps.executeQuery()) {
-                    System.out.println("12"+rs);
-                    System.out.println("BONJOUR je suis dans le find by all");
                     while (rs.next()) {
                         Operation operation;
                         operation = new Operation();
