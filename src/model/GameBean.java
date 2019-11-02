@@ -73,7 +73,6 @@ public class GameBean implements Serializable {
                     try {
                         User u = userDAO.findById((long) ope.getIdUser());
                         ope.setPseudo(u.getLogin());
-                        System.out.println(ope.getPseudo());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
