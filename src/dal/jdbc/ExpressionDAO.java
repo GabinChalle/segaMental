@@ -33,6 +33,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
                 }
             }
         }
+        connection.close();
     }
     public void insertInto(ArrayList<Expression> object) throws SQLException {
         Connection connection = DAOFactory.getJDBCConnection();
@@ -60,6 +61,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
                 }
             }
         }
+        connection.close();
     }
 
     @Override
@@ -73,6 +75,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
                 ps.executeUpdate();
             }
         }
+        connection.close();
     }
 
     @Override
@@ -84,6 +87,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
                 ps.executeUpdate();
             }
         }
+        connection.close();
     }
 
     @Override
@@ -98,6 +102,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
                 }
             }
         }
+        connection.close();
         return expression;
     }
 
@@ -120,6 +125,7 @@ public class ExpressionDAO implements IDAO<Long, Expression> {
                 }
             }
         }
+        connection.close();
         return list;
     }
 }

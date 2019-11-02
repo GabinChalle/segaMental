@@ -20,9 +20,9 @@ import java.util.Map;
 public class GameBean implements Serializable {
 
     private Map operations;
-    private OperationDAO operationDAO = new OperationDAO();
-    private ExpressionDAO expressionDAO = new ExpressionDAO();
-    private UserDAO userDAO = new UserDAO();
+    private OperationDAO operationDAO;
+    private ExpressionDAO expressionDAO;
+    private UserDAO userDAO;
     private static final String ATT_SESS_SCORES_LIST = "scoreslist";
     private Operation currentOperation;
     private ArrayList<Expression> expressions;
@@ -49,8 +49,14 @@ public class GameBean implements Serializable {
             String calcul;
             if (i < 5) {
                 calcul = Calcul.genererCalculBinaire();
+                while ((boolean)(Calcul.calculer(calcul) != (int)Calcul.calculer(calcul))) {
+                    calcul = Calcul.genererCalculBinaire();
+                }
             } else {
                 calcul = Calcul.genererCalculUnaire();
+                while ((boolean)(Calcul.calculer(calcul) != (int)Calcul.calculer(calcul))) {
+                    calcul = Calcul.genererCalculUnaire();
+                }
             }
             Double resAttendu = Calcul.calculer(calcul);
             Expression exp = new Expression();
@@ -62,6 +68,8 @@ public class GameBean implements Serializable {
     }
 
     public void loadScoreList(HttpServletRequest request) {
+        userDAO = new UserDAO();
+        operationDAO = new OperationDAO();
         HttpSession session = request.getSession();
         operations = (Map<String, Operation>)  session.getAttribute(ATT_SESS_SCORES_LIST);
         if (null == operations) {
@@ -97,45 +105,20 @@ public class GameBean implements Serializable {
     }
 
     public void operationCreate(Operation operation) throws SQLException {
+        operationDAO = new OperationDAO();
         operationDAO.create(operation);
     }
     public void expressionCreate(ArrayList<Expression> expression) throws SQLException {
+        expressionDAO = new ExpressionDAO();
         expressionDAO.insertInto(expression);
     }
     public void operationUpdate(Operation operation) throws SQLException {
+        expressionDAO = new ExpressionDAO();
         operationDAO.update(operation);
     }
 
     //getters and setters
     public Map getOperations() {
         return operations;
-    }
-
-    public void setOperations(Map operations) {
-        this.operations = operations;
-    }
-
-    public OperationDAO getOperationDAO() {
-        return operationDAO;
-    }
-
-    public void setOperationDAO(OperationDAO operationDAO) {
-        this.operationDAO = operationDAO;
-    }
-
-    public static String getAttSessScoresList() {
-        return ATT_SESS_SCORES_LIST;
-    }
-
-    public Operation getCurrentOperation() {
-        return currentOperation;
-    }
-
-    public void setCurrentOperation(Operation currentOperation) {
-        this.currentOperation = currentOperation;
-    }
-
-    public void setExpressions(ArrayList<Expression> expressions) {
-        this.expressions = expressions;
     }
 }

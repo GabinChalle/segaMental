@@ -68,6 +68,7 @@ public class GameController extends HttpServlet {
                 bean.operationUpdate(operation);
                 request.setAttribute("expressions", expressions);
                 request.setAttribute("score", score);
+                bean = new GameBean();
 
             }catch(Exception e){
                 e.printStackTrace();

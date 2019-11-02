@@ -13,7 +13,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
     private static final String UPDATE_QUERY = "UPDATE operations SET score = ? , id_user = ? WHERE id_op= ?";
     private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id_op= ? ";
     private static final String FIND_QUERY = "SELECT * from operations Where id_op = ?";
-    private static final String FINDALL_QUERY = "SELECT id_user, id_op, score  FROM operations ORDER BY score";
+    private static final String FINDALL_QUERY = "SELECT id_user, id_op, score  FROM operations ORDER BY score DESC LIMIT 10";
 
     @Override
     public void create(Operation object) throws SQLException {
@@ -30,6 +30,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
                 }
             }
         }
+        connection.close();
     }
 
     @Override
@@ -43,6 +44,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
                 ps.executeUpdate();
             }
         }
+        connection.close();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
                 ps.executeUpdate();
             }
         }
+        connection.close();
     }
 
     @Override
@@ -72,6 +75,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
                 }
             }
         }
+        connection.close();
         return operation;
     }
 
@@ -93,6 +97,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
                 }
             }
         }
+        connection.close();
         return list;
     }
 }

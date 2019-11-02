@@ -40,6 +40,7 @@ public class UserDAO implements IUserDAO<Long, User> {
                 }
             }
         }
+        connection.close();
         return user;
     }
 
@@ -59,6 +60,7 @@ public class UserDAO implements IUserDAO<Long, User> {
                 }
             }
         }
+        connection.close();
     }
 
     @Override
@@ -72,6 +74,7 @@ public class UserDAO implements IUserDAO<Long, User> {
                 ps.executeUpdate();
             }
         }
+        connection.close();
     }
 
     @Override
@@ -83,6 +86,7 @@ public class UserDAO implements IUserDAO<Long, User> {
                 ps.executeUpdate();
             }
         }
+        connection.close();
     }
 
     @Override
@@ -99,8 +103,8 @@ public class UserDAO implements IUserDAO<Long, User> {
                     }
                 }
             }
-
         }
+        connection.close();
         return user;
     }
 
@@ -122,6 +126,7 @@ public class UserDAO implements IUserDAO<Long, User> {
                 }
             }
         }
+        connection.close();
         return list;
     }
 }
