@@ -13,7 +13,7 @@ public class OperationDAO implements IDAO<Long, Operation> {
     private static final String UPDATE_QUERY = "UPDATE operations SET score = ? , id_user = ? WHERE id_op= ?";
     private static final String REMOVE_QUERY = "DELETE FROM operations WHERE id_op= ? ";
     private static final String FIND_QUERY = "SELECT * from operations Where id_op = ?";
-    private static final String FINDALL_QUERY = "SELECT * FROM operations";
+    private static final String FINDALL_QUERY = "SELECT id_user, id_op, score  FROM operations ORDER BY score";
 
     @Override
     public void create(Operation object) throws SQLException {
