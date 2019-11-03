@@ -24,6 +24,6 @@ et dans web vous retrouverez les pages webs, le css, le dossier vendor...
 
 L'Application
 
-Vous pouvez vous connectez avec des identifiants ui sont présent dans la BDD ou créer votre compte, il est aussi posisble de se connecter dans la partie admin pour avoir accès à la liste des utilisateurs qui peuvent se connecter  avec le MDP : kze369 , il est possible de les modifiers, en ajouter et d'en supprimer
+Vous pouvez vous connectez avec des identifiants qui sont présent dans la BDD ou créer votre compte, il est aussi possible de se connecter dans la partie admin pour avoir accès à la liste des utilisateurs qui peuvent se connecter  avec le MDP : kze369 , il est possible de les modifier, en ajouter et d'en supprimer
 
 Lorsqu'un utilisateur c'est connecter, il est possible d'afficher les scores ou alors de jouer. Lorsque le jeu est fini, vous avez vos scores d'afficher et la possibilité de recommencer une partie. 

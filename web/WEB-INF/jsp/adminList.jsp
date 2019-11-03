@@ -17,8 +17,6 @@
     </div>
 </div>
 <jsp:useBean id="contactBean" class="model.UserBean" scope="request"/>
-<c:choose>
-    <c:when test="${contactBean.user.login == 'Admin' && contactBean.isConnected(requestScope)}">
         <div class="row small-8 small-centered">
             <table class="unstriped">
                 <thead>
@@ -50,22 +48,6 @@
                         class="fa fa-user-plus"></i> Ajouter</a>
             </div>
         </div>
-    </c:when>
-    <c:when test="${contactBean.user.login == 'Admin' && contactBean.isConnected(requestScope)}}">
-        <div class="text-center">
-            <p>Vous êtes pas accès à cette page, vous n'êtes pas admin</p>
-            <a class="button align-center" href="<c:url value="/game"/>"><i
-                    class="fa fa-user-plus"></i> Retour au jeu</a>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div class="text-center">
-            <p>Vous n'avez pas accès à cette page, vous n'êtes pas admin, connectez-vous en tant qu'admin dans la page de connection</p>
-            <a class="button align-center" href="<c:url value="/login"/>"><i
-                    class="fa fa-user-plus"></i> Aller a la page de connection</a>
-        </div>
-    </c:otherwise>
-</c:choose>
 <script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/foundation-6.5.1/js/vendor/foundation.min.js"></script>
 <script>
